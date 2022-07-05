@@ -1,0 +1,34 @@
+{
+ "menuList":[
+   {
+    "id": "1",
+    "icon": "el-icon-s-home",
+    "name": "首页",
+    "to":"/index"
+   },
+   {
+    "id": "2",
+    "icon": "el-icon-menu",
+    "name": "前端分享",
+    "to":"/technology/index"
+   },
+   {
+    "id": "3",
+    "icon": "el-icon-s-platform",
+    "name": "书籍分享",
+    "to":"/article/index"
+   },
+   {
+    "id": "4",
+    "icon": "el-icon-user-solid",
+    "name": "个人主页",
+    "to":"/mydashbord/index"
+   },
+   {
+    "id": "5",
+    "icon": "el-icon-message-solid",
+    "name": "建议信箱",
+    "to":"/message/index"
+   }
+ ]
+}
