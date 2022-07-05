@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-05 15:36:06
+ * @LastEditTime: 2022-07-05 16:00:34
  */
 const path = require("path")
 function resolve(dir) {
@@ -43,11 +43,11 @@ module.exports = {
     sourceMap: true,
     // css预设器配置项
     loaderOptions: {
-      // sass: {
-      //   // @/ is an alias to src/
-      //   // so this assumes you have a file named `src/variables.scss`
-      //   prependData: `@import "@/styles/variables.scss";`
-      // }
+      sass: {
+        // @/ is an alias to src/
+        // so this assumes you have a file named `src/variables.scss`
+        prependData: `@import "@/styles/variables.scss";`
+      }
     }
   },
   pages: {

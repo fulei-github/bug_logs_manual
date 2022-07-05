@@ -1,3 +1,11 @@
+<!--
+ * @Description: 2
+ * @Date: 2022-07-05 15:13:59
+ * @Version: 0.1
+ * @Autor: fulei
+ * @LastEditors: fulei
+ * @LastEditTime: 2022-07-05 15:46:41
+-->
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
@@ -34,7 +42,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
     msg: String
   }
