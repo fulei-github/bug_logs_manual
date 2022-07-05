@@ -4,11 +4,15 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-05 16:02:02
+ * @LastEditTime: 2022-07-05 16:32:25
 -->
 <template>
   <div id="app">
-    <el-button>默认按钮</el-button>
+    <el-button @click="click">默认按钮</el-button>
+    <SvgIcon icon-class="date" style="position:relative; top:4px;" />
+    <li>22</li>
+    <li>22</li>
+    <li>22</li>
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -16,7 +20,18 @@
     <router-view />
   </div>
 </template>
-
+<script>
+export default {
+  methods: {
+    click() {
+      this.$message({
+        message: "恭喜你，这是一条成功消息",
+        type: "success"
+      })
+    }
+  }
+}
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

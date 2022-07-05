@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-05-20 13:05:20
+ * @LastEditTime: 2022-07-05 16:26:02
 -->
 <template>
   <el-carousel :interval="2800">
@@ -19,28 +19,28 @@ export default {
   name: "f-carousel",
   data() {
     return {
-      imgList: [
-        {
-          id: 1,
-          src: require("@pic/carousel/lbt7.jpg")
-        },
-        {
-          id: 2,
-          src: require("@pic/carousel/lbt3.jpg")
-        },
-        {
-          id: 3,
-          src: require("@pic/carousel/lbt2.jpg")
-        },
-        {
-          id: 4,
-          src: require("@pic/carousel/lbt1.jpg")
-        },
-        {
-          id: 5,
-          src: require("@pic/carousel/bg4.jpg")
-        }
-      ]
+      // imgList: [
+      //   {
+      //     id: 1,
+      //     src: require("@pic/carousel/lbt7.jpg")
+      //   },
+      //   {
+      //     id: 2,
+      //     src: require("@pic/carousel/lbt3.jpg")
+      //   },
+      //   {
+      //     id: 3,
+      //     src: require("@pic/carousel/lbt2.jpg")
+      //   },
+      //   {
+      //     id: 4,
+      //     src: require("@pic/carousel/lbt1.jpg")
+      //   },
+      //   {
+      //     id: 5,
+      //     src: require("@pic/carousel/bg4.jpg")
+      //   }
+      // ]
     }
   },
 

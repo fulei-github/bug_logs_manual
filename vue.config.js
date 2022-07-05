@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-05 16:00:34
+ * @LastEditTime: 2022-07-05 17:51:07
  */
 const path = require("path")
 function resolve(dir) {
@@ -67,13 +67,33 @@ module.exports = {
     }
   },
   chainWebpack: (config) => {
-    // 别名配置
-    config.resolve.alias
-      .set("@", resolve("src"))
-      .set("@utils", resolve("src/utils"))
-      .set("@api", resolve("src/api"))
-      .set("@components", resolve("src/components"))
-      .set("@pic", resolve("src/assets/imgs"))
-    config.resolve.extensions.clear().merge([".js", ".vue", ".json"])
+    config.entry.app = ["./src/main.js"],
+
+      // 别名配置
+      config.resolve.alias
+        .set("@", resolve("src"))
+        .set("@utils", resolve("src/utils"))
+        .set("@api", resolve("src/api"))
+        .set("@components", resolve("src/components"))
+        .set("@pic", resolve("src/assets/imgs"))
+    config.resolve.extensions
+      .clear()
+      .merge([".js", ".vue", ".json"])
+    // set svg-sprite-loader
+    config.module
+      .rule("svg")
+      .exclude.add(resolve("src/icons"))
+      .end()
+    config.module
+      .rule("icons")
+      .test(/\.svg$/)
+      .include.add(resolve("src/icons"))
+      .end()
+      .use("svg-sprite-loader")
+      .loader("svg-sprite-loader")
+      .options({
+        symbolId: "icon-[name]"
+      })
+      .end()
   }
 }
