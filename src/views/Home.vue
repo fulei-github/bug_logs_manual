@@ -4,23 +4,46 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-05 15:46:24
+ * @LastEditTime: 2022-07-05 22:49:58
 -->
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="home-box">
+    <div class="left_box">
+      <div class="content">left_box</div>
+    </div>
+    <div class="right_box">right_box</div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue"
 
 export default {
-  name: "Home",
-  components: {
-    HelloWorld
-  }
+  name: "Home"
+
 }
 </script>
+<style lang="scss" scoped>
+.home-box {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  .left_box {
+    width: calc(100% - 340px);
+    height: 100%;
+    margin-right: $space_12;
+    background-color: white;
+    border-radius: 24px;
+    .content {
+      animation: aniBottomTop 600ms ease-in-out;
+    }
+  }
+  .right_box {
+    width: 340px;
+    height: 100%;
+    background-color: white;
+    border-radius: 24px;
+    animation: anitRightLeft 600ms ease-in-out;
+  }
+}
+</style>

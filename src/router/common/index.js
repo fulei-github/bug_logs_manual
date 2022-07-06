@@ -4,10 +4,10 @@
  * @Version: 0.1
  * @Autor: cjz
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-05 16:12:09
+ * @LastEditTime: 2022-07-05 17:54:46
  */
 
-// import Layout from "@/layout/index.vue"
+import Layout from "@/layout/index.vue"
 
 export default [
   // {
@@ -17,7 +17,7 @@ export default [
   // },
   {
     path: "/",
-    // component: Layout,
+    component: Layout,
     redirect: "/index",
     children: [
       {

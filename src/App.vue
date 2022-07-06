@@ -4,53 +4,46 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-05 16:32:25
+ * @LastEditTime: 2022-07-05 18:03:26
 -->
 <template>
   <div id="app">
-    <el-button @click="click">默认按钮</el-button>
-    <SvgIcon icon-class="date" style="position:relative; top:4px;" />
-    <li>22</li>
-    <li>22</li>
-    <li>22</li>
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <keep-alive>
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 <script>
 export default {
   methods: {
-    click() {
-      this.$message({
-        message: "恭喜你，这是一条成功消息",
-        type: "success"
-      })
-    }
+
   }
 }
 </script>
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  height: 100%;
+  //非卡片区块容器
+  .container-box {
+    padding: 16px;
   }
+  //卡片区块页面容器
+  .page-container {
+    // margin: 16px;
+    background: #fff;
+    padding: 16px 10px;
+    border-radius: 2px;
+  }
+  .panel-box {
+    background: #fff;
+    margin-bottom: 12px;
+    padding: 16px 10px;
+  }
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 </style>
