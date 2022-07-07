@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-05 16:07:03
+ * @LastEditTime: 2022-07-07 22:04:59
  */
 // global transition css
 .transition{
@@ -57,7 +57,17 @@
   position: absolute;
 }
 
+@keyframes aniTopBottom {
+  0%{
+    transform: translateY(-100px);
+    opacity: 0;
 
+}
+  100%{
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
 @keyframes aniBottomTop {
   0%{
     transform: translateY(100px);
@@ -72,7 +82,6 @@
     opacity: 1;
   }
 }
-
 @keyframes aniLeftRight {
   0%{
     transform: translateX(-100px);

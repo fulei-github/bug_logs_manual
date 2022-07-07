@@ -4,13 +4,14 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-07 09:55:02
+ * @LastEditTime: 2022-07-07 21:10:46
 -->
 <template>
   <div id="app">
     <keep-alive>
       <router-view />
     </keep-alive>
+
   </div>
 </template>
 <script>

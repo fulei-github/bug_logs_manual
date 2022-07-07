@@ -1,9 +1,9 @@
 <!--
  * @Description: 分页
- * @Autor: guoruliang
+ * @Autor: fulei
  * @Date: 2020-05-07 23:22:51
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-07 14:50:12
+ * @LastEditTime: 2022-07-07 22:35:18
  -->
 <template>
   <div :class="{'hidden':hidden}" class="pagination-container">
@@ -32,7 +32,7 @@ export default {
     pageSizes: {
       type: Array,
       default() {
-        return [10, 20, 30, 50]
+        return [20, 30, 50]
       }
     },
     layout: {

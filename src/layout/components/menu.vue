@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-05 20:50:17
+ * @LastEditTime: 2022-07-07 18:24:21
 -->
 <template>
   <!-- <el-menu :default-active='index' :collapse="true" :unique-opened="true" router class="el-menu-vertical-demo">
@@ -17,7 +17,7 @@
     <div class="logo">
       <svg-icon icon-class="bug" class="logo-svg" />
     </div>
-    <li v-for="(item,index) in data" :index="item.index" :key="item.id" :class="`f-menu-item ${defaultItem==item.index?'actived':''}`" @click="handleClick(index)">
+    <li v-for="(item,index) in data" :index="item.index" :key="item.id" :class="`f-menu-item ${defaultItem==item.index?'actived':''}`" @click="handleClick(item,index)">
       <el-tooltip effect="dark" :content="item.name" placement="right-start">
         <i :class="item.icon" style="font-size:24px"></i>
       </el-tooltip>
@@ -46,19 +46,19 @@ export default {
           id: "2",
           icon: "el-icon-mobile",
           name: "编辑文章",
-          index: "/article-edit"
+          index: "/"
         },
         {
           id: "3",
           icon: "el-icon-tickets",
           name: "编辑文章",
-          index: "/article-edit"
+          index: "/"
         },
         {
           id: "4",
           icon: "el-icon-user",
           name: "编辑文章",
-          index: "/article-edit"
+          index: "/"
         }
       ],
       activedIndex: 0,
@@ -103,7 +103,9 @@ export default {
       isObj(obj) //调用函数
       return res //返回结果
     },
-    handleClick(i) {
+    handleClick(item, i) {
+      this.$router.push(item.index)
+      console.log(item, i)
       // this.activedIndex = i
     }
   }

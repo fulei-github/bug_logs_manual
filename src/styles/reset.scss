@@ -24,7 +24,9 @@
   font-size: 16px;
   &__item {
     font-size: 16px;
-    
+    &:hover{
+      color: $main_color;
+    }
     &.is-top,&.is-bottom{
       padding: 0 !important;
       margin-right: 40px;
@@ -82,3 +84,202 @@
   color: $main_color;
 }
 //分页
+
+/*************  <- 弹窗样式重置 -> 开始 **************/
+.el-dialog{
+  font-size: 14px;
+  box-shadow: $shadow_2;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  // 弹框居中
+  margin-top: 0 !important;
+  top: 50%;
+  transform: translate(0, -50%);
+  &__wrapper,
+  .el-message-box__wrapper {
+    //弹窗背景遮罩颜色
+    background: $mask_black;
+  }
+  &__header {
+    border-bottom: 1px solid $second_border_color-table;
+    padding: 0 16px;
+  }
+  // 弹窗标题样式
+  &__title {
+    font-size: 16px;
+    padding: 0px $space_10 0px;
+    height: 48px;
+    line-height: 48px;
+    position: relative;
+    font-weight: bold;
+    &::after{
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      left: 0;
+      width:6px;
+      height:16px;
+      background: $main_color;
+     }
+  }
+  // 关闭按钮位置
+  &__headerbtn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+  // 弹窗容器内间距
+  &__body {
+    padding: $space_16 $space_24;
+    // min-height: 200px;
+    .el-form-item__label{
+      padding-right: 8px;
+    }
+    .el-input, .el-input--small, .el-select, .item-select, .el-select--small{
+      width: 100%;
+    }
+  }
+  // 底部按钮间距
+  &__footer {
+    padding: 10px $space_24 $space_24;
+    button{
+      margin-left: 10px;
+    }
+  }
+}
+// 弹窗关闭按钮
+.el-dialog__headerbtn .el-dialog__close {
+  color: $fourth_text_color;
+}
+/*************  <- 弹窗样式重置 -> 结束 **************/
+
+/*************  <- 表单样式 -> 开始 **************/
+.el-range-editor.is-active, .el-range-editor.is-active:hover, .el-select .el-input.is-focus .el-input__inner{
+  border-color:$main_color
+}
+.el-select .el-input__inner:focus{
+  border-color:$main_color
+}
+
+/*************  <- 表单样式 -> 结束 **************/
+
+/*************  <- 按钮样式重置 -> 开始 **************/
+.el-button {
+  font-size: 14px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 2px;
+  padding:0 $space_16;
+  &--mini{
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+  }
+  &--small{
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+  }
+  &--medium{
+    font-size: 16px;
+    line-height: 40px;
+  }
+}
+// 两个字按钮开始
+.el-button.two-words.el-button--mini{
+  width:56px;
+  height:24px;
+  padding: 0;
+}
+.el-button.two-words.el-button--small{
+  width:64px;
+  height:32px;
+  padding: 0;
+}
+.el-button.two-words.el-button--medium {
+  width:80px;
+  height:40px;
+  padding: 0;
+}
+
+// 两个字按钮结束
+
+/*************  <- 按钮样式重置 -> 结束 **************/
+
+// 提示框开始
+.el-message{
+  font-size: 18px; 
+  height: 36px;
+  padding: 0 $space_24;
+  line-height: 36px;
+  border-radius:4px;
+  &.no-icon{
+    .el-message__icon{
+      display: none;
+    }
+  }
+  &.el-message--info{
+    background-color: $light_blue_color;
+    .el-message__content{
+      color: $main_color;
+    }
+  }
+  &.el-message--success{
+    background-color: $light_success_color;
+    .el-message__content{
+      color: $success_color;
+    }
+  }
+  &.el-message--error{
+    background-color: $light_danger_color;
+    .el-message__content{
+      color: $danger_color;
+    }
+  }
+  &.el-message--warning{
+    background-color: $light_warn_color;
+    .el-message__content{
+      color: $warn_color;
+    }
+  }
+  .el-message__icon{
+    margin-right: 8px;
+    &.el-icon-error{
+      color: $danger_color;
+    }
+    &.el-icon-success{
+      color: $success_color;
+    }
+    &.el-icon-warning{
+      color: $warn_color;
+    }
+    &.el-icon-info{
+      color: $main_color;
+    }
+  }
+
+  &.icon{
+    height: 56px;
+    .el-message__icon{
+      margin-right: 14px;
+      &::before{
+        font-size: 28px;
+      }
+    }
+    .el-message__content{
+      .msg-box{
+        .msg-title{
+          font-size: 14px;
+          line-height: 22px;
+          margin: 0;
+        }
+        .msg-content{
+          font-size: 12px;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+}
+// 提示框结束

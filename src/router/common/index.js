@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: cjz
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-05 17:54:46
+ * @LastEditTime: 2022-07-07 21:45:27
  */
 
 import Layout from "@/layout/index.vue"
@@ -26,7 +26,37 @@ export default [
           title: "首页"
         },
         component: () =>
-          import(/* webpackChunkName: "publicModule" */ "@/views/Home.vue")
+          import(/* webpackChunkName: "publicModule" */ "@/views/home/index.vue")
+      }
+    ]
+  },
+  {
+    path: "/article",
+    component: Layout,
+    redirect: "/article",
+    children: [
+      {
+        path: "/article-edit",
+        meta: {
+          title: "编辑文章"
+        },
+        component: () =>
+          import(/* webpackChunkName: "publicModule" */ "@/views/article-module/edit.vue")
+      }
+    ]
+  },
+  {
+    path: "/article-detail",
+    component: Layout,
+    redirect: "/article-detail",
+    children: [
+      {
+        path: "/article-detail",
+        meta: {
+          title: "文章详情"
+        },
+        component: () =>
+          import(/* webpackChunkName: "publicModule" */ "@/views/article-module/detail.vue")
       }
     ]
   }

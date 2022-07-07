@@ -2,7 +2,7 @@
   <ul class="list-box">
     <transition name="fade" mode="out-in">
       <div v-if="list.length">
-        <li class="list-item" v-for="(item,i) in list" :key="i">
+        <li class="list-item" v-for="(item,i) in list" :key="i" @click="handleClick">
           <el-image class="image" :src="item.article_img" fit="scale-down"></el-image>
           <div class="info-box">
             <p class="title">{{item.article_title}}</p>
@@ -51,6 +51,9 @@ export default {
   created() {
   },
   methods: {
+    handleClick() {
+      this.$router.push("/article-detail")
+    }
 
   }
 }
