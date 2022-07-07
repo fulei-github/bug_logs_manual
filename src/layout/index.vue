@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-05 22:47:24
+ * @LastEditTime: 2022-07-06 18:01:03
 -->
 <template>
   <div class='container'>
@@ -12,9 +12,11 @@
       <f-menu />
     </div>
     <div class="layout-box">
+      <!-- <transition name="fade"> -->
       <keep-alive>
         <router-view />
       </keep-alive>
+      <!-- </transition> -->
     </div>
   </div>
 </template>

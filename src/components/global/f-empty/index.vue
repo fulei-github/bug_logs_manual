@@ -4,42 +4,43 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-06-11 21:38:17
+ * @LastEditTime: 2022-07-07 14:37:29
 -->
 <template>
-  <el-empty description="暂无发布记录，请您前往后台管理系统发表文章哦！">
-    <el-button type="primary" size="small" @click="goAdminAddress">点击前往</el-button>
-  </el-empty>
+  <div class="container-box" :style="{marginTop: marginTop+'px'}">
+    <img src="@/assets/imgs/defend.png" alt="">
+    <div class="text">暂无内容</div>
+  </div>
 </template>
 
 <script>
 export default {
   name: "f-empty",
-  data() {
-    return {
-
-    }
-  },
-
-  mounted() {
-
-  },
-
-  methods: {
-    goAdminAddress() {
-      this.$message({
-        type: "warning",
-        message: "待开发..."
-      })
+  props: {
+    marginTop: {
+      type: Number,
+      default: 40
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-@import "@/styles/variables.scss";
-::v-deep .el-button--primary {
-  background-color: $main_color;
-  border-color: $main_color;
+<style scoped lang="scss">
+.container-box {
+  width: 100%;
+  margin: auto;
+  img {
+    display: block;
+    width: 180px;
+    height: 124px;
+    margin: auto;
+  }
+  .text {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 20px;
+    color: $third_text_color;
+  }
 }
 </style>

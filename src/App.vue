@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-05 18:03:26
+ * @LastEditTime: 2022-07-07 09:55:02
 -->
 <template>
   <div id="app">
@@ -23,6 +23,8 @@ export default {
 <style lang="scss">
 #app {
   height: 100%;
+  overflow: hidden;
+
   //非卡片区块容器
   .container-box {
     padding: 16px;

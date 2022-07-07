@@ -4,12 +4,14 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-05 17:53:07
+ * @LastEditTime: 2022-07-07 10:24:49
  */
 import Vue from "vue"
 import App from "./App.vue"
 import router from "./router"
 import store from "./store"
+import Mixin from "./mixins"
+Vue.mixin(Mixin)
 import "@/use" //注册组件
 import "@/icons"
 import "@/theme/element-variables.scss"

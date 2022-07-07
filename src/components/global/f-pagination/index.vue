@@ -3,18 +3,17 @@
  * @Autor: guoruliang
  * @Date: 2020-05-07 23:22:51
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-03 13:00:30
+ * @LastEditTime: 2022-07-07 14:50:12
  -->
 <template>
   <div :class="{'hidden':hidden}" class="pagination-container">
-    <div></div>
-    <div class="left-info"><span>总共 {{ total }} 条</span> <span>显示{{ start }}-{{ end }}条</span></div>
+    <!-- <div class="left-info"><span>总共 {{ total }} 条</span> <span>显示{{ start }}-{{ end }}条</span></div> -->
     <el-pagination class="flex-shrink" :background="background" :current-page.sync="currentPage" :page-size.sync="pageSize" :layout="layout" :page-sizes="pageSizes" :total="total" v-bind="$attrs" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
   </div>
 </template>
 
 <script>
-import { scrollTo } from "../../../utils/scroll-to"
+import { scrollTo } from "@/utils/scroll-to"
 export default {
   name: "f-pagination",
   props: {
@@ -97,7 +96,7 @@ export default {
 
 <style scoped>
 .pagination-container {
-  background: #ffffff;
+  /* background: #ffffff; */
   padding: 32px 0;
 }
 .pagination-container.hidden {

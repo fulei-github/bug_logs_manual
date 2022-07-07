@@ -1,0 +1,84 @@
+//loading样式重置-s
+.el-loading-spinner .circular{
+  background: url('../assets/imgs/loading_table@2x.png') no-repeat;
+  background-size: 100%;
+  width: 36px;
+  height: 36px;
+  font-size: 14px;
+  color: $main_text_color;
+  animation-duration: 1s;
+}
+//loading样式重置-e
+  // 加载器遮罩层-s
+.el-loading-mask{
+  background: rgba(255, 255, 255, .70);
+}
+
+.el-loading-spinner .el-loading-text {
+  font-size: 14px;
+  color: $main_color;
+}
+
+//tabs样式重置
+.el-tabs{
+  font-size: 16px;
+  &__item {
+    font-size: 16px;
+    
+    &.is-top,&.is-bottom{
+      padding: 0 !important;
+      margin-right: 40px;
+    }
+    &.is-left,&.is-right{
+      padding: 0 16px;
+    }
+   
+    font-weight: normal;
+  }
+  &__item.is-active {
+    color: $main_color;
+    font-weight: 600;
+    &.is-top,&.is-bottom{
+       border-bottom: 2px solid $main_color;
+    }
+  }
+  &__nav-wrap::after {
+    background: $third_border_color;
+    height: 2px;
+  }
+  &__active-bar {
+    height: 0px;
+  }
+  &__nav-prev, &__nav-next{
+    width: 36px;
+    text-align: center;
+  }
+  &__nav-prev:hover, &__nav-next:hover{
+    color: $main_color;
+  }
+  // Using to fixed the left and right arrows
+  &__nav-wrap.is-scrollable{
+    padding: 0 36px !important;
+  }
+  &__header{
+    &.is-top{
+      margin-bottom:10px;
+    }
+    
+  }
+}
+//tabs样式重置-e
+//分页
+.el-pagination.is-background .el-pager li:not(.disabled){
+  color: $main_text_color;
+}
+.el-pagination.is-background .el-pager li:not(.disabled).active{
+  background-color:$main_color;
+}
+.el-pagination.is-background .el-pager li:not(.disabled):hover{
+  // color: $main_color;
+}
+.el-select-dropdown__item.selected{
+  color: $main_color;
+}
+//分页
