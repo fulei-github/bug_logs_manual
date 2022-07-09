@@ -4,17 +4,17 @@
  * @Version: 0.1
  * @Autor: cjz
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-07 21:45:27
+ * @LastEditTime: 2022-07-08 14:24:28
  */
 
 import Layout from "@/layout/index.vue"
 
 export default [
-  // {
-  //   path: "/",
-  //   component: () =>
-  //     import(/* webpackChunkName: "publicModule" */ "@/views/me-module")
-  // },
+  {
+    path: "/login",
+    component: () =>
+      import(/* webpackChunkName: "publicModule" */ "@/views/login-module/index.vue")
+  },
   {
     path: "/",
     component: Layout,

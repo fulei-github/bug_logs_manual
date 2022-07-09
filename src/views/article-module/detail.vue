@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-07 22:40:02
+ * @LastEditTime: 2022-07-08 11:31:12
 -->
 <template>
   <div class='container-box'>
@@ -115,11 +115,11 @@ export default {
   .content {
     margin-top: 20px;
     overflow-y: scroll !important;
-    height: 80vh;
+    height: 82vh;
     border-radius: 30px;
     animation: aniBottomTop 600ms ease-in-out;
     &::-webkit-scrollbar {
-      width: 5px;
+      width: 0;
       height: 0 !important;
     }
     &::-webkit-scrollbar-thumb {

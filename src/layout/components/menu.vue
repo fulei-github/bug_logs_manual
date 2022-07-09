@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-07 18:24:21
+ * @LastEditTime: 2022-07-08 11:46:26
 -->
 <template>
   <!-- <el-menu :default-active='index' :collapse="true" :unique-opened="true" router class="el-menu-vertical-demo">
@@ -124,6 +124,7 @@ export default {
     margin-top: 80px;
     margin-bottom: 50px;
     border-radius: 10px;
+    cursor: pointer;
     .logo-svg {
       width: 30px;
       height: 30px;
