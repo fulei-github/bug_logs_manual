@@ -3,7 +3,7 @@
  * @Autor: fulei
  * @Date: 2020-05-07 23:22:51
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-07 22:35:18
+ * @LastEditTime: 2022-07-09 09:06:06
  -->
 <template>
   <div :class="{'hidden':hidden}" class="pagination-container">
@@ -96,8 +96,12 @@ export default {
 
 <style scoped>
 .pagination-container {
+  /* float: right; */
   /* background: #ffffff; */
+  text-align: right;
   padding: 32px 0;
+}
+.flex-shrink {
 }
 .pagination-container.hidden {
   display: none;

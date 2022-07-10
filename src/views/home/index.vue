@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-07 22:43:09
+ * @LastEditTime: 2022-07-09 09:37:06
 -->
 
 <template>
@@ -34,7 +34,7 @@
 
         <!-- 按照热度排序 -->
         <el-tooltip effect="dark" content="是否热度排序" placement="bottom" :hide-after="1500">
-          <div class="hot-botton">
+          <div class="hot-botton" @click="getArticleList">
             <svg-icon icon-class="hot_red"></svg-icon>
           </div>
         </el-tooltip>
@@ -97,6 +97,7 @@ export default {
       this.activeName = val.id
     },
     getMenuList() {
+      this.tabsList = []
       for (let index = 0; index < 20; index++) {
         this.tabsList.push({
           name: "前端" + (index + 1),

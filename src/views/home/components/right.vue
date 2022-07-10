@@ -4,14 +4,14 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-07 22:32:23
+ * @LastEditTime: 2022-07-09 09:35:57
 -->
 <template>
   <div class='right-info'>
     <!-- 统计 -->
     <div class="overview">
       <span class="overview-item">
-        <p>团队</p>
+        <p>用户</p>
         <p>10</p>
       </span>
       <span class="overview-item item-border">
@@ -25,7 +25,7 @@
     </div>
     <!-- 卡片 -->
     <div class="team-attribute">
-      <h3>参与贡献团队</h3>
+      <h3>参与贡献用户</h3>
       <span>{{teamTip}}</span><br>
       <div class="teamer-show">
         <span v-for="(item, index) in userList" :key="index" class="teamer-box">
@@ -46,7 +46,7 @@
         <span class="get-thumbs">获得 <span class="color-main">3</span> 个点赞</span>
       </h3>
       <div class="article-name">
-        <el-collapse v-model="activeNames">
+        <el-collapse v-model="activeNames" accordion>
           <el-collapse-item :title="item.name" :name="index" v-for="(item, index) in list" :key="index">
             <div class="article-list clearfix" v-for="(child, ind) in item.data" :key="ind">
               <span class="article-title">{{child && child.title}} </span>

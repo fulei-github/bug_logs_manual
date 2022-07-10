@@ -1,5 +1,5 @@
 <template>
-  <div class="y-title" :style="style">
+  <div class="f-title" :style="style">
     <div :class="border ? 'content' : 'border-none content'" :style="contStyle">
       <p v-if="content">{{ content }}</p>
       <span :class="`tab ${activedIndex==index?'actived':''}`" v-else v-for="(item,index) in tabs" :key="index" :tab='index'>{{item}}</span>
@@ -168,13 +168,12 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import "@/styles/variables.scss";
-.y-title {
+.f-title {
   background-color: #fff;
   position: relative;
   margin-top: 8px;
   p {
-    line-height: 0px;
+    line-height: 40px;
   }
   span {
     line-height: 40px;

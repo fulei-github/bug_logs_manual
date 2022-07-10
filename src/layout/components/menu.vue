@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-08 11:46:26
+ * @LastEditTime: 2022-07-10 11:17:11
 -->
 <template>
   <!-- <el-menu :default-active='index' :collapse="true" :unique-opened="true" router class="el-menu-vertical-demo">
@@ -31,6 +31,12 @@ export default {
     return {
       data: [
         {
+          id: "4",
+          icon: "el-icon-s-platform",
+          name: "监控大屏",
+          index: "/echarts"
+        },
+        {
           id: "0",
           icon: "el-icon-s-home",
           name: "首页",
@@ -44,21 +50,15 @@ export default {
         },
         {
           id: "2",
-          icon: "el-icon-mobile",
-          name: "编辑文章",
-          index: "/"
+          icon: "el-icon-s-grid",
+          name: "权限管理",
+          index: "/permission"
         },
         {
           id: "3",
-          icon: "el-icon-tickets",
-          name: "编辑文章",
-          index: "/"
-        },
-        {
-          id: "4",
           icon: "el-icon-user",
-          name: "编辑文章",
-          index: "/"
+          name: "个人账号",
+          index: "/personal"
         }
       ],
       activedIndex: 0,
@@ -75,38 +75,22 @@ export default {
     }
   },
   created() {
-    const obj = {
-      a: {
-        hello: "2121",
-        fafs: 13123
-      },
-      b: {
-        f: {
-          dsf: "fsdfsd"
-        }
-      }
-    }
-    console.log(this.objFun(obj))
+
   },
   methods: {
-    objFun(obj) {
-      var res = {} //定义一个对象，用来存储结果
-      function isObj(obj) { //定义一个函数，用来对obj进行遍历
-        for (var key in obj) {
-          if (Object.prototype.toString.call(obj[key]) == "[object Object]") { //如果值为对象，则进行递归
-            isObj(obj[key])
-          } else { //不为对象则将值添加给res
-            res[key] = obj[key]
-          }
-        }
-      }
-      isObj(obj) //调用函数
-      return res //返回结果
-    },
+
     handleClick(item, i) {
-      this.$router.push(item.index)
-      console.log(item, i)
-      // this.activedIndex = i
+      if (item.index === "/echarts") {
+        this.$confirm(`为获得更好的体验，请您进入大屏页面后按下键盘F11`, "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        }).then(() => {
+          this.$router.push(item.index)
+        })
+      } else {
+        this.$router.push(item.index)
+      }
     }
   }
 }

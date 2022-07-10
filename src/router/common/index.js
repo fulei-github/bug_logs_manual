@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: cjz
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-08 14:24:28
+ * @LastEditTime: 2022-07-09 09:58:53
  */
 
 import Layout from "@/layout/index.vue"
@@ -59,6 +59,41 @@ export default [
           import(/* webpackChunkName: "publicModule" */ "@/views/article-module/detail.vue")
       }
     ]
+  },
+  {
+    path: "/permission",
+    component: Layout,
+    redirect: "/permission",
+    children: [
+      {
+        path: "/permission",
+        meta: {
+          title: "权限管理"
+        },
+        component: () =>
+          import(/* webpackChunkName: "publicModule" */ "@/views/permission-module")
+      }
+    ]
+  },
+  {
+    path: "/personal",
+    component: Layout,
+    redirect: "/personal",
+    children: [
+      {
+        path: "/personal",
+        meta: {
+          title: "个人用户"
+        },
+        component: () =>
+          import(/* webpackChunkName: "publicModule" */ "@/views/personal-module")
+      }
+    ]
+  },
+  {
+    path: "/echarts",
+    component: () =>
+      import(/* webpackChunkName: "publicModule" */ "@/views/echarts/index.vue")
   }
   // {
   //   path: "*",
