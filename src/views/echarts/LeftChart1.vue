@@ -4,12 +4,12 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-09 13:00:12
+ * @LastEditTime: 2022-07-13 22:38:38
 -->
 <template>
   <div class="left-chart-1">
     <div class="lc1-header">文章分类</div>
-    <dv-decoration-3 style="width:200px;height:10px;" />
+    <dv-decoration-3 style="width:120px;height:10px;" />
 
     <!-- <div class="lc1-details">分类总数<span>31</span></div> -->
     <!-- <dv-capsule-chart class="lc1-chart" :config="config" /> -->

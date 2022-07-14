@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-09 12:52:20
+ * @LastEditTime: 2022-07-13 22:38:59
 -->
 <template>
   <div class="bottom-charts">
@@ -12,7 +12,7 @@
 
       <div class="chart-name">
         <div class="title">十五日内阅读总量</div>
-        <dv-decoration-3 style="width:300px;height:10px;" />
+        <dv-decoration-3 style="width:240px;height:10px;" />
       </div>
       <dv-charts :option="option" style="margin-top:-30px" />
     </div>

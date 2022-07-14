@@ -4,12 +4,11 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-09 09:37:06
+ * @LastEditTime: 2022-07-14 14:54:30
 -->
 
 <template>
   <div class="home-box">
-
     <div class="left_box">
       <div class="content" v-loading="loading" element-loading-text="快好了，请稍等...">
         <!-- tab分类区域 -->
@@ -141,6 +140,7 @@ export default {
   height: 100%;
   width: 100%;
   overflow: hidden;
+
   // margin: 4px 0 0 5px;
   .left_box {
     width: calc(100% - 380px);

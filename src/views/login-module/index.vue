@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-08 23:30:33
+ * @LastEditTime: 2022-07-14 14:42:52
 -->
 <template>
   <div class="login-box" ref="vantaRef">
@@ -60,7 +60,7 @@
 
 <script>
 // import { createUserApi } from "@/api/user/index"
-// import { mapActions } from "vuex"
+import { mapActions } from "vuex"
 export default {
   data() {
     const validatePassword2 = (rule, value, callback) => {
@@ -103,7 +103,7 @@ export default {
     }
   },
   methods: {
-    // ...mapActions("user", ["getTokenAction"]),
+    ...mapActions("user", ["getTokenAction"]),
     //点击注册或者登录按钮
     async handleSubmit(key) {
       this.loading = true
@@ -124,13 +124,20 @@ export default {
     },
     //登录的api
     async handleLogin() {
-      this.$message.info("待开发...")
-      // const params = {
-      //   username: this.form.username,
-      //   password: this.form.password
-      // }
-      // await this.getTokenAction(params)
-      // this.$router.replace(this.redirect || "/")
+      // this.$message.info("待开发...")
+      try {
+        const params = {
+          username: this.form.username,
+          password: this.form.password
+        }
+        await this.getTokenAction(params)
+        // if (res.code === 200) {
+        //   this.$message.success(res.msg)
+        // }
+        this.$router.replace(this.redirect || "/")
+      } catch (error) {
+        console.log(error)
+      }
     },
     //注册的api
     handleReg() {

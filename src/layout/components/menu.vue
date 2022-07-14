@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-10 11:17:11
+ * @LastEditTime: 2022-07-10 11:31:46
 -->
 <template>
   <!-- <el-menu :default-active='index' :collapse="true" :unique-opened="true" router class="el-menu-vertical-demo">
@@ -14,7 +14,7 @@
       </el-menu-item>
     </el-menu> -->
   <ul class="f-menu">
-    <div class="logo">
+    <div class="logo" @click="goMe">
       <svg-icon icon-class="bug" class="logo-svg" />
     </div>
     <li v-for="(item,index) in data" :index="item.index" :key="item.id" :class="`f-menu-item ${defaultItem==item.index?'actived':''}`" @click="handleClick(item,index)">
@@ -78,7 +78,6 @@ export default {
 
   },
   methods: {
-
     handleClick(item, i) {
       if (item.index === "/echarts") {
         this.$confirm(`为获得更好的体验，请您进入大屏页面后按下键盘F11`, "提示", {
@@ -91,6 +90,9 @@ export default {
       } else {
         this.$router.push(item.index)
       }
+    },
+    goMe() {
+      this.$router.push("me")
     }
   }
 }

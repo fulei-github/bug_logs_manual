@@ -4,12 +4,12 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-09 12:46:32
+ * @LastEditTime: 2022-07-13 22:40:17
 -->
 <template>
   <div class="right-chart-2">
     <div class="rc1-header">点赞收藏统计</div>
-    <dv-decoration-3 style="width:200px;height:10px;" />
+    <dv-decoration-3 style="width:170px;height:10px;" />
     <div class="rc1-chart-container">
       <div class="left">
         <div class="number">267</div>

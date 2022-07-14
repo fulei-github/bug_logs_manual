@@ -4,12 +4,12 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-09 12:46:26
+ * @LastEditTime: 2022-07-13 22:39:28
 -->
 <template>
   <div class="right-chart-1">
     <div class="rc1-header">文章分类概览</div>
-    <dv-decoration-3 style="width:200px;height:10px;" />
+    <dv-decoration-3 style="width:170px;height:10px;" />
     <div class="rc1-chart-container">
       <div class="left">
         <div class="number">262</div>

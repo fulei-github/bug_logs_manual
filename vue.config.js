@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-05 17:51:07
+ * @LastEditTime: 2022-07-14 11:51:01
  */
 const path = require("path")
 function resolve(dir) {
@@ -26,7 +26,7 @@ module.exports = {
     disableHostCheck: true,
     proxy: {
       "/api": {
-        target: "http://192.168.1.232:20000",
+        target: "http://127.0.0.1:7001/api",
         ws: true,
         changOrigin: true,
         pathRewrite: {
@@ -67,8 +67,7 @@ module.exports = {
     }
   },
   chainWebpack: (config) => {
-    config.entry.app = ["./src/main.js"],
-
+    (config.entry.app = ["./src/main.js"]),
       // 别名配置
       config.resolve.alias
         .set("@", resolve("src"))
@@ -76,14 +75,9 @@ module.exports = {
         .set("@api", resolve("src/api"))
         .set("@components", resolve("src/components"))
         .set("@pic", resolve("src/assets/imgs"))
-    config.resolve.extensions
-      .clear()
-      .merge([".js", ".vue", ".json"])
+    config.resolve.extensions.clear().merge([".js", ".vue", ".json"])
     // set svg-sprite-loader
-    config.module
-      .rule("svg")
-      .exclude.add(resolve("src/icons"))
-      .end()
+    config.module.rule("svg").exclude.add(resolve("src/icons")).end()
     config.module
       .rule("icons")
       .test(/\.svg$/)

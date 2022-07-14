@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-05 16:10:52
+ * @LastEditTime: 2022-07-13 23:03:06
  */
 
 import Vue from "vue"
@@ -38,5 +38,12 @@ var router = new Router({
   },
   routes
 })
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject) {
+    return originalPush.call(this, location, onResolve, onReject)
+  }
+  return originalPush.call(this, location).catch(err => err)
+}
 
 export default router

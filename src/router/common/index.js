@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: cjz
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-09 09:58:53
+ * @LastEditTime: 2022-07-10 11:31:31
  */
 
 import Layout from "@/layout/index.vue"
@@ -94,6 +94,11 @@ export default [
     path: "/echarts",
     component: () =>
       import(/* webpackChunkName: "publicModule" */ "@/views/echarts/index.vue")
+  },
+  {
+    path: "/me",
+    component: () =>
+      import(/* webpackChunkName: "publicModule" */ "@/views/me-module/index.vue")
   }
   // {
   //   path: "*",

@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-09 09:35:57
+ * @LastEditTime: 2022-07-14 11:46:20
 -->
 <template>
   <div class='right-info'>
@@ -189,17 +189,7 @@ export default {
   .article-box {
     width: 300px;
     height: 600px;
-    overflow: scroll;
-    &::-webkit-scrollbar {
-      width: 0;
-      height: 0 !important;
-    }
-    &::-webkit-scrollbar-thumb {
-      background: $second_border_color;
-    }
-    &::-webkit-scrollbar-track {
-      border: none 0;
-    }
+
     h3 {
       color: $third_text_color;
       width: 100%;
@@ -213,6 +203,18 @@ export default {
       }
     }
     ::v-deep .article-name {
+      overflow: scroll;
+      height: 100%;
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0 !important;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: $second_border_color;
+      }
+      &::-webkit-scrollbar-track {
+        border: none 0;
+      }
       .el-collapse-item__header {
         color: $second_blue_color;
         font-size: 16px;
