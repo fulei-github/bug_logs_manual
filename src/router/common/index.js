@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: cjz
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-10 11:31:31
+ * @LastEditTime: 2022-07-16 15:25:50
  */
 
 import Layout from "@/layout/index.vue"
@@ -72,6 +72,21 @@ export default [
         },
         component: () =>
           import(/* webpackChunkName: "publicModule" */ "@/views/permission-module")
+      }
+    ]
+  },
+  {
+    path: "/catgory",
+    component: Layout,
+    redirect: "/catgory",
+    children: [
+      {
+        path: "/catgory",
+        meta: {
+          title: "文章管理"
+        },
+        component: () =>
+          import(/* webpackChunkName: "publicModule" */ "@/views/catgory-module")
       }
     ]
   },

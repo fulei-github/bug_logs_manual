@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-14 14:42:52
+ * @LastEditTime: 2022-07-14 15:00:17
 -->
 <template>
   <div class="login-box" ref="vantaRef">
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-// import { createUserApi } from "@/api/user/index"
+import { createUserApi } from "@/api/user/index"
 import { mapActions } from "vuex"
 export default {
   data() {
@@ -141,17 +141,19 @@ export default {
     },
     //注册的api
     handleReg() {
-      this.isLogin = !this.isLogin
-      // const params = {
-      //   username: this.form.username1,
-      //   password: this.form.password1
-      // }
-      // createUserApi(params)
-      //   .then(res => {
-      //     if (res.code === 200) {
-      //       this.isLogin = !this.isLogin
-      //     }
-      //   })
+      // this.isLogin = !this.isLogin
+      const params = {
+        username: this.form.username1,
+        password: this.form.password1
+      }
+      createUserApi(params)
+        .then(res => {
+          if (res.code === 200) {
+            this.$message.success(res.data)
+            this.isLogin = !this.isLogin
+            console.log(res)
+          }
+        })
     },
     // 切换登录注册
     handleClick() {

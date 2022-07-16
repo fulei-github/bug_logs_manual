@@ -344,3 +344,7 @@
     }
   }
   // 确认框结束
+
+  .el-input.is-active .el-input__inner, .el-input__inner:focus{
+    border-color:$main_color;
+  }

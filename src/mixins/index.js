@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-08 14:34:04
+ * @LastEditTime: 2022-07-16 16:15:53
  */
 import { formatLabelByLocalCode } from "@/utils/dictionary"
 import { dayFormat } from "@/utils/dayjs"
@@ -12,7 +12,15 @@ import { random } from "@/utils/common"
 import { validateUserNameFn, validatePassWordFn } from "@/utils/check"
 
 export default {
-
+  data() {
+    return {
+      paginationForm: {
+        total: 10,
+        page: "1",
+        rows: "10"
+      }
+    }
+  },
   methods: {
     formatLabelByLocalCode,
     dayFormat,

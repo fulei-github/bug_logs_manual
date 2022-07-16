@@ -4,12 +4,13 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-14 12:21:03
+ * @LastEditTime: 2022-07-16 16:58:19
  */
 import qs from "qs"
 import axios from "axios"
 import { getToken } from "@/utils/auth"
 import Vue from "vue"
+import Router from "../router"
 function commonJoinQuery(config) {
   let url = config.url
   const data = config.data
@@ -93,6 +94,7 @@ service.interceptors.response.use(
   (error) => {
     if (error.response.status === 401) {
       Vue.prototype.$message.error("登录过期,请重新登录")
+      Router.replace("/login")
     }
   }
 )

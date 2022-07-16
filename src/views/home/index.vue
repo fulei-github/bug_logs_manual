@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-14 14:54:30
+ * @LastEditTime: 2022-07-16 01:02:39
 -->
 
 <template>
@@ -61,6 +61,7 @@
 <script>
 import ListPanel from "../article-module/index.vue"
 import RightPanel from "./components/right.vue"
+import { getCatgoryApi } from "@api/article/index"
 // import { showFullScreenLoading, endLoading } from "@/utils/loading"
 export default {
   name: "Home",
@@ -70,7 +71,7 @@ export default {
   },
   data() {
     return {
-      activeName: "",
+      activeName: "1",
       tabsList: [],
       list: [],
       loading: false,
@@ -80,16 +81,27 @@ export default {
   watch: {
     activeName: {
       handler(newval) {
-        this.getArticleList()
-        console.log(this.activeName)
+        this.getCatgory()
       }
     }
   },
   created() {
-    this.getMenuList()
-
+    // this.getMenuList()
+    this.getCatgory()
   },
   methods: {
+    //获取文章分类
+    getCatgory() {
+      getCatgoryApi()
+        .then(res => {
+          if (res.code === 200) {
+            res.data.data.forEach(v => {
+              v.id = String(v.id)
+            })
+            this.tabsList = res.data.data
+          }
+        })
+    },
     changeClassify(tab, event) {
     },
     handleCardTab(val) {

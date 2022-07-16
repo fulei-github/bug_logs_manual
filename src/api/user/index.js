@@ -1,10 +1,10 @@
 /*
- * @Description: 
+ * @Description:
  * @Date: 2022-06-30 21:09:07
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-13 22:57:17
+ * @LastEditTime: 2022-07-14 16:09:37
  */
 import request from "../axios"
 // const serveName = process.env.VUE_APP_SERVE_NAME
@@ -23,6 +23,15 @@ export function createUserApi(params) {
 export function loginApi(params) {
   return request({
     url: `/api/user/login`,
+    method: "post",
+    data: params
+  })
+}
+
+// 获取所有用户接口
+export function getAllUserApi(params) {
+  return request({
+    url: `/api/user/findAll`,
     method: "post",
     data: params
   })

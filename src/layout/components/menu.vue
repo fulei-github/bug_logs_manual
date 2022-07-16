@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-10 11:31:46
+ * @LastEditTime: 2022-07-16 15:23:39
 -->
 <template>
   <!-- <el-menu :default-active='index' :collapse="true" :unique-opened="true" router class="el-menu-vertical-demo">
@@ -55,6 +55,12 @@ export default {
           index: "/permission"
         },
         {
+          id: "5",
+          icon: "el-icon-notebook-1",
+          name: "文章管理",
+          index: "/catgory"
+        },
+        {
           id: "3",
           icon: "el-icon-user",
           name: "个人账号",
@@ -69,6 +75,7 @@ export default {
     $route: {
       handler(to) {
         this.defaultItem = to.fullPath
+        console.log("菜单栏组件", to)
       },
       deep: true,
       immediate: true
@@ -92,7 +99,8 @@ export default {
       }
     },
     goMe() {
-      this.$router.push("me")
+      // this.$router.push("me")
+      this.$router.push("/")
     }
   }
 }
