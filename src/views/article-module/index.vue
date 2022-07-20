@@ -2,14 +2,14 @@
   <ul class="list-box">
     <transition name="fade" mode="out-in">
       <div v-if="list.length">
-        <li class="list-item" v-for="(item,i) in list" :key="i" @click="handleClick">
+        <li class="list-item" v-for="(item,i) in list" :key="i" @click="handleClick(item)">
           <el-image class="image" :src="item.article_img" fit="scale-down"></el-image>
           <div class="info-box">
-            <p class="title">{{item.article_title}}</p>
+            <p class="title">{{item.title}}</p>
             <p class="footer">
               <span class="avatar">
-                <img :src="item.avatar">
-                <!-- <i class="el-icon-user-solid" v-else></i> -->
+                <img v-if="!!item.avatar" :src="item.avatar">
+                <i class="el-icon-user-solid" v-else></i>
               </span>
               <span class="company-name mr24">{{item.article_author}}</span>
               <span class="mr24">
@@ -51,8 +51,13 @@ export default {
   created() {
   },
   methods: {
-    handleClick() {
-      this.$router.push("/article-detail")
+    handleClick(item) {
+      this.$router.push({
+        path: "/article-detail",
+        query: {
+          info: item
+        }
+      })
     }
 
   }

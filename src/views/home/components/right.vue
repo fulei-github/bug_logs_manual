@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-14 11:46:20
+ * @LastEditTime: 2022-07-16 22:27:48
 -->
 <template>
   <div class='right-info'>
@@ -16,11 +16,11 @@
       </span>
       <span class="overview-item item-border">
         <p>文章</p>
-        <p>300</p>
+        <p>{{rightForm.art_total}}</p>
       </span>
       <span class="overview-item">
         <p>分类</p>
-        <p>31</p>
+        <p>{{rightForm.cat_total}}</p>
       </span>
     </div>
     <!-- 卡片 -->
@@ -55,12 +55,19 @@
           </el-collapse-item>
         </el-collapse>
       </div>
+      <!-- <f-empty /> -->
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    rightForm: {
+      type: Object,
+      default: () => ({})
+    }
+  },
   data() {
     return {
       teamTip: "",
@@ -89,9 +96,13 @@ export default {
       "偷偷定下小目标：拿一次榜一☝️"
     ]
     this.teamTip = arr[Math.floor(Math.random() * arr.length)]
-    this.getMenuList()
+    // this.getMenuList()
   },
   methods: {
+    //初始化信息
+    formatInfo() {
+
+    },
     avaMore() { },
     getMenuList() {
       this.list = []

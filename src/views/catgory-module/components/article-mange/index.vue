@@ -1,10 +1,10 @@
 <!--
- * @Description: 用户管理
+ * @Description: 文章管理
  * @Date: 2022-06-24 13:16:42
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-14 16:53:36
+ * @LastEditTime: 2022-07-16 22:13:01
 -->
 <template>
   <div class="box">
@@ -20,12 +20,12 @@
         <el-form ref="form" :model="form" label-width="70px" size="small">
           <el-row>
             <el-col :span="6">
-              <el-form-item label="用户名称">
+              <el-form-item label="文章标题">
                 <el-input v-model="form.username"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6">
-              <el-form-item label="手机号码">
+              <el-form-item label="作者">
                 <el-input v-model="form.phone"></el-input>
               </el-form-item>
             </el-col>
@@ -44,64 +44,42 @@
       </div>
     </transition>
 
-    <f-title content="用户列表">
+    <f-title content="文章列表">
       <template #right-area>
         <el-button plain size="small" @click="showFormArea = !showFormArea">{{showFormArea ? '隐藏搜索' : '显示搜索'}}</el-button>
         <el-button plain size="small" @click="getAllList">刷新</el-button>
       </template>
     </f-title>
     <el-table :data="tableData" border v-loading="loading">
-      <!-- <el-table-column type="index" label="序号" align="center" width="100">
-      </el-table-column>
-      <el-table-column prop="permission" label="险种类型" align="center">
-      </el-table-column>
-      <el-table-column prop="permission" label="单位参保状态" align="center">
-      </el-table-column>
-      <el-table-column prop="permission" label="单位缴费状态" align="center">
-      </el-table-column>
-      <el-table-column prop="permission" label="单位参保时间" align="center">
-      </el-table-column>
-      <el-table-column prop="permission" label="组织有效状态" align="center">
-      </el-table-column> -->
       <el-table-column type="selection" align="center" width="55">
       </el-table-column>
-      <el-table-column type="index" label="用户编号" align="center" width="100">
+      <el-table-column type="index" label="文章编号" align="center" width="100">
       </el-table-column>
-      <el-table-column label="用户名称" prop="username" align="center"></el-table-column>
-      <el-table-column prop="phone" label="手机号码" align="center">
-        <template slot-scope="scope">
-          {{!!scope.row.phone ? scope.row.phone : "该用户没有登记手机号哦~"}}
-        </template>
+      <el-table-column label="文章标题" prop="title" align="center"></el-table-column>
+      <el-table-column prop="author" label="作者" align="center">
       </el-table-column>
-      <el-table-column prop="permission" label="拥有角色" align="center">
+      <el-table-column prop="catgory" label="所属目录" align="center">
       </el-table-column>
-      <el-table-column prop="state" label="状态" align="center" width="100">
-        <template slot-scope="scope">
-          <el-switch v-model="scope.row.state" active-color="rgba(76, 110, 245,1)" inactive-color="#ff4949" disabled>
-          </el-switch>
-        </template>
+      <el-table-column prop="article_thumbs" label="点赞人数" align="center" width="100">
+      </el-table-column>
+      <el-table-column prop="article_views" label="阅读人数" align="center" width="100">
       </el-table-column>
       <el-table-column prop="created_at" label="创建时间" align="center"></el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
-          <el-button type="primary" size="mini" @click="setRole(scope.row)">设置角色</el-button>
-
+          <el-button type="primary" size="mini" @click="viewDetail(scope.row)">查 看</el-button>
           <el-button type="danger" size="mini" @click="handleDelte(scope.row)">删 除</el-button>
         </template>
       </el-table-column>
     </el-table>
     <f-pagination :total="paginationForm.total" :pageSizes="[10,20, 30, 50]" @pagination="pagination" />
-    <set-role-dialog :showDialog="showDialog" />
   </div>
 </template>
 
 <script>
-import SetRoleDialog from "./dialog.vue"
-import { getAllUserApi } from "@/api/user/index"
+import { getArticleApi, delArticleApi } from "@/api/article"
 export default {
-  components: {
-    SetRoleDialog
-  },
+
   data() {
     return {
       tableData: [],
@@ -133,16 +111,27 @@ export default {
           rows: this.paginationForm.rows,
           page: this.paginationForm.page
         }
-        const res = await getAllUserApi(params)
+        const res = await getArticleApi(params)
         if (res.code === 200) {
-          this.paginationForm.total = res.data.total
+          console.log(res)
+          // this.paginationForm.total = res.data.total
           this.tableData = res.data.data
-          this.tableData.forEach(v => { v.state = v.state === "1" ? true : false })
+          // this.tableData.forEach(v => { v.state = v.state === "1" ? true : false })
         }
       } catch (error) {
         console.log(error)
       }
       this.loading = false
+    },
+    //删除文章
+    delCatgory(id) {
+      delArticleApi({ id })
+        .then(res => {
+          if (res.code === 200) {
+            this.$message.info(res.msg)
+            this.getAllList()
+          }
+        })
     },
     //重置表单
     reset() {
@@ -159,56 +148,29 @@ export default {
       this.getAllList()
     },
     //设置角色
-    setRole(row) {
-      this.showDialog = true
+    viewDetail(row) {
+      this.$router.push({
+        path: "/article-detail",
+        query: {
+          info: row
+        }
+      })
     },
-    //模拟数据
-    getList() {
-      this.loading = true
-      const timers = setTimeout(() => {
-        this.tableData = [
-          {
-            userName: "admin",
-            phone: "13001973483",
-            state: "1",
-            createDate: "20220606"
-          },
-          {
-            userName: "user-1",
-            phone: "13001973483",
-            state: "1",
-            createDate: "20220620"
-          },
-          {
-            userName: "user-1",
-            phone: "13001973483",
-            state: "0",
-            createDate: "20220620"
-          }
-        ]
-        this.loading = false
-        clearTimeout(timers)
-      }, 300)
-    },
-
     //删除按钮
     handleDelte(row) {
-      console.log(row)
-      // this.$confirm(`您确定删除 ${row.userName}? 用户吗？`, "提示", {
-      //   confirmButtonText: "确定",
-      //   cancelButtonText: "取消",
-      //   type: "warning"
-      // }).then(() => {
-      //   this.$message({
-      //     type: "success",
-      //     message: "删除成功!"
-      //   })
-      // }).catch(() => {
-      //   this.$message({
-      //     type: "info",
-      //     message: "已取消删除"
-      //   })
-      // })
+      this.$confirm(`您确定删除 ${row.title} 文章吗？`, "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        this.delCatgory(row.id)
+
+      }).catch(() => {
+        this.$message({
+          type: "info",
+          message: "已取消删除"
+        })
+      })
     }
   }
 }

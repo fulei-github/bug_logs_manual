@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-16 01:02:39
+ * @LastEditTime: 2022-07-16 22:20:16
 -->
 
 <template>
@@ -24,7 +24,7 @@
           <i class="el-icon-menu"></i>
         </div>
         <transition name="fade" mode="out-in">
-          <ul class="card-tabs clearfix" v-if="isShowCardTab" @mouseleave="isShowCardTab=false">
+          <ul class="card-tabs clearfix" v-if="isShowCardTab" @click="isShowCardTab=!isShowCardTab">
             <li class="mr12 mb12" :class="{'select-card-tab': item.id === activeName}" v-for="item in tabsList" :key="item.id" @click="handleCardTab(item)">
               {{item.name}}
             </li>
@@ -33,16 +33,16 @@
 
         <!-- 按照热度排序 -->
         <el-tooltip effect="dark" content="是否热度排序" placement="bottom" :hide-after="1500">
-          <div class="hot-botton" @click="getArticleList">
+          <div class="hot-botton" @click="getArticle">
             <svg-icon icon-class="hot_red"></svg-icon>
           </div>
         </el-tooltip>
         <!-- 分页 -->
-        <f-pagination class="pagination" :total="100" @pagination="pagination" />
+        <f-pagination class="pagination" :total="paginationForm.total" :pageSizes="[10,20, 30, 50]" @pagination="pagination" />
       </div>
     </div>
     <div class="right_box">
-      <right-panel />
+      <right-panel :rightForm="rightForm" />
     </div>
     <div class="copyright">
       <span class="mr24">
@@ -61,7 +61,7 @@
 <script>
 import ListPanel from "../article-module/index.vue"
 import RightPanel from "./components/right.vue"
-import { getCatgoryApi } from "@api/article/index"
+import { getCatgoryApi, getArticleApi } from "@api/article/index"
 // import { showFullScreenLoading, endLoading } from "@/utils/loading"
 export default {
   name: "Home",
@@ -75,7 +75,11 @@ export default {
       tabsList: [],
       list: [],
       loading: false,
-      isShowCardTab: false
+      isShowCardTab: false,
+      rightForm: {
+        cat_total: 0,
+        art_total: 0
+      }
     }
   },
   watch: {
@@ -86,8 +90,8 @@ export default {
     }
   },
   created() {
-    // this.getMenuList()
     this.getCatgory()
+    this.getArticle()
   },
   methods: {
     //获取文章分类
@@ -99,7 +103,28 @@ export default {
               v.id = String(v.id)
             })
             this.tabsList = res.data.data
+            this.rightForm.cat_total = res.data.total
           }
+        })
+    },
+    //获取文章列表
+    getArticle() {
+      this.loading = true
+      const params = {
+        rows: this.paginationForm.rows,
+        page: this.paginationForm.page
+      }
+      getArticleApi(params)
+        .then(res => {
+          if (res.code === 200) {
+            this.list = res.data.data
+            this.paginationForm.total = res.data.total
+            this.rightForm.art_total = res.data.total
+            console.log("res", res)
+          }
+        })
+        .finally(() => {
+          this.loading = false
         })
     },
     changeClassify(tab, event) {
@@ -107,38 +132,11 @@ export default {
     handleCardTab(val) {
       this.activeName = val.id
     },
-    getMenuList() {
-      this.tabsList = []
-      for (let index = 0; index < 20; index++) {
-        this.tabsList.push({
-          name: "前端" + (index + 1),
-          id: String(index)
-        })
-      }
-    },
-    getArticleList() {
-      this.loading = true
-      // showFullScreenLoading()
-      this.list = []
-      const timers = setTimeout(() => {
-        for (let index = 0; index < 20; index++) {
-          this.list.push({
-            article_title: "前端常用60种工具方法",
-            avatar: require("@/assets/imgs/bg4.jpg"),
-            article_img: require("@/assets/imgs/bg4.jpg"),
-            article_author: "admin用户",
-            article_views: 20,
-            article_thumbs: 20,
-            article_time: Date.now()
-          })
-        }
-        // endLoading()
-        this.loading = false
-        clearTimeout(timers)
-      }, 300)
-    },
+    //分页
     pagination(val) {
-      this.getArticleList()
+      this.paginationForm.rows = String(val.limit)
+      this.paginationForm.page = String(val.page)
+      this.getArticle()
     },
     update() {
       this.$message.info("该功能暂未开放...")

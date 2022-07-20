@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-16 17:20:39
+ * @LastEditTime: 2022-07-16 22:52:12
 -->
 <template>
   <div class="box">
@@ -131,6 +131,7 @@ export default {
         .then(res => {
           if (res.code === 200) {
             this.$message.info(res.msg)
+            this.getCatgory()
           }
         })
     },
@@ -169,6 +170,7 @@ export default {
         type: "warning"
       }).then(() => {
         this.delCatgoryApi(row.id)
+
       }).catch(() => {
         this.$message({
           type: "info",

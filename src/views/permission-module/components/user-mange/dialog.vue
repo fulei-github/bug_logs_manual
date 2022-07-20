@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-14 16:40:25
+ * @LastEditTime: 2022-07-16 23:00:51
 -->
 <template>
   <el-dialog title="设置角色" :visible.sync="showDialog" width="30%" :before-close="handleClose">
@@ -95,4 +95,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.el-button--primary {
+  background-color: $main_color;
+  border-color: $main_color;
+  &:hover {
+    background-color: $gradient_blue_color_2;
+    border-color: $fourth_border_color;
+  }
+}
+.el-button--default {
+  &:hover {
+    color: $main_color;
+    border-color: $main_color;
+  }
+}
 </style>

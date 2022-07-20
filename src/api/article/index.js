@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-16 16:42:10
+ * @LastEditTime: 2022-07-16 22:12:37
  */
 import request from "../axios"
 // const serveName = process.env.VUE_APP_SERVE_NAME
@@ -41,6 +41,33 @@ export function delCatgoryApi(data) {
 export function editCatgoryApi(data) {
   return request({
     url: `/api/category/editCatgory`,
+    method: "post",
+    data
+  })
+}
+
+// 获取文章列表
+export function getArticleApi(data) {
+  return request({
+    url: `/api/article/getArticle`,
+    method: "post",
+    data
+  })
+}
+
+// 新增文章
+export function addArticleApi(data) {
+  return request({
+    url: `/api/article/addArticle`,
+    method: "post",
+    data
+  })
+}
+
+// 删除文章
+export function delArticleApi(data) {
+  return request({
+    url: `/api/article/delArtById`,
     method: "post",
     data
   })

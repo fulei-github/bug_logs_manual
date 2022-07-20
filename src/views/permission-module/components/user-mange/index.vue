@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-14 16:53:36
+ * @LastEditTime: 2022-07-16 23:05:30
 -->
 <template>
   <div class="box">
@@ -67,13 +67,19 @@
       </el-table-column>
       <el-table-column type="index" label="用户编号" align="center" width="100">
       </el-table-column>
-      <el-table-column label="用户名称" prop="username" align="center"></el-table-column>
+      <el-table-column label="用户名称" prop="username" align="center">
+        <template slot-scope="scope">
+          {{!!scope.row.nickname ? scope.row.nickname : scope.row.username}}
+        </template>
+      </el-table-column>
       <el-table-column prop="phone" label="手机号码" align="center">
         <template slot-scope="scope">
           {{!!scope.row.phone ? scope.row.phone : "该用户没有登记手机号哦~"}}
         </template>
       </el-table-column>
       <el-table-column prop="permission" label="拥有角色" align="center">
+      </el-table-column>
+      <el-table-column prop="email" label="邮箱" align="center">
       </el-table-column>
       <el-table-column prop="state" label="状态" align="center" width="100">
         <template slot-scope="scope">
@@ -91,7 +97,7 @@
       </el-table-column>
     </el-table>
     <f-pagination :total="paginationForm.total" :pageSizes="[10,20, 30, 50]" @pagination="pagination" />
-    <set-role-dialog :showDialog="showDialog" />
+    <set-role-dialog :showDialog="showDialog" @close="showDialog = false" />
   </div>
 </template>
 

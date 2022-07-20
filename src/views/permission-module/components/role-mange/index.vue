@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-14 16:02:27
+ * @LastEditTime: 2022-07-16 22:52:01
 -->
 <template>
   <div class="box">
@@ -60,16 +60,15 @@
       </el-table-column>
       <el-table-column type="index" label="角色编号" align="center" width="200">
       </el-table-column>
-      <el-table-column label="角色名称" prop="roleName" align="center"></el-table-column>
-      <el-table-column prop="string" label="权限字符" align="center"></el-table-column>
-      <el-table-column prop="state" label="状态" align="center">
+      <el-table-column label="角色名称" prop="permission" align="center"></el-table-column>
+      <el-table-column prop="permission" label="权限字符" align="center"></el-table-column>
+
+      <el-table-column prop="desc" label="权限描述" align="center"></el-table-column>
+      <el-table-column prop="created_at" label="创建时间" align="center">
         <template slot-scope="scope">
-          <el-switch v-model="scope.row.state" active-color="#13ce66" inactive-color="#ff4949" disabled>
-          </el-switch>
+          {{dayFormat(scope.row.created_at,"datetime")}}
         </template>
       </el-table-column>
-      <el-table-column prop="roleDesc" label="权限描述" align="center"></el-table-column>
-      <el-table-column prop="createDate" label="创建时间" align="center"></el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.row)">编 辑</el-button>
@@ -78,11 +77,12 @@
       </el-table-column>
     </el-table>
     <f-pagination :total="100" @pagination="pagination" />
-    <edit-dialog :showDialog="showDialog" :type="type" :formData="sonForm" @close="showDialog = false" />
+    <edit-dialog :showDialog="showDialog" :type="type" :formData="sonForm" @close="closeDialog" />
   </div>
 </template>
 
 <script>
+import { getAllRoleListApi, delroleApi } from "@/api/user/index"
 import EditDialog from "./edit.vue"
 export default {
   components: {
@@ -101,13 +101,47 @@ export default {
   },
 
   created() {
-    this.getList()
+    this.getAllList()
   },
 
   methods: {
+    //获取角色列表
+    async getAllList() {
+      this.loading = true
+      try {
+        const params = {
+          rows: this.paginationForm.rows,
+          page: this.paginationForm.page
+        }
+        const res = await getAllRoleListApi(params)
+        if (res.code === 200) {
+          this.paginationForm.total = res.data.total
+          this.tableData = res.data.data
+          // this.tableData.forEach(v => { v.state = v.state === "1" ? true : false })
+        }
+      } catch (error) {
+        console.log(error)
+      }
+      this.loading = false
+    },
+    //删除角色
+    delrole(id) {
+      delroleApi({ id })
+        .then(res => {
+          if (res.code === 200) {
+            this.$message.info(res.msg)
+            this.getAllList()
+          }
+        })
+    },
     //重置表单
     reset() {
       this.form = {}
+    },
+    //关闭弹窗
+    closeDialog() {
+      this.getAllList()
+      this.showDialog = false
     },
     //搜索按钮
     queryInfo() {
@@ -163,15 +197,13 @@ export default {
     },
     //删除按钮
     handleDelte(row) {
-      this.$confirm(`您确定删除 ${row.roleName}? 角色吗？`, "提示", {
+      this.$confirm(`您确定删除 ${row.permission}? 角色吗？`, "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
       }).then(() => {
-        this.$message({
-          type: "success",
-          message: "删除成功!"
-        })
+        this.delrole(row.id)
+
       }).catch(() => {
         this.$message({
           type: "info",

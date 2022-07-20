@@ -5,19 +5,19 @@
  * @Autor: fulei
  * @Date: 2022-07-03 13:12:24
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-07 22:33:13
+ * @LastEditTime: 2022-07-16 21:58:40
 -->
 <template>
   <div class="page-article-edit">
     <div class="article-title">
       <span class="input">
-        <el-input v-model="articleTitle" clearable placeholder="请输入文章标题..."></el-input>
+        <el-input v-model.trim="articleTitle" clearable placeholder="请输入文章标题..."></el-input>
       </span>
       <span class="publish">
         <el-button type="primary" @click="click">文章发布</el-button>
       </span>
     </div>
-    <mavon-editor ref="md" v-model="articleContent" @save="saveEditor" :ishljs="true" :tabSize="2" :toolbars="toolbars" :placeholder="placeholder">
+    <mavon-editor ref="md" v-model="articleContent" @save="saveEditor" @imgAdd="imgAdd" :ishljs="true" :tabSize="2" :toolbars="toolbars" :placeholder="placeholder">
       <!-- 左工具栏前加入自定义按钮 -->
       <template slot="left-toolbar-after">
         <button type="button" class="op-icon fa fa-clear-local" aria-hidden="true" title="清本地缓存">清</button>
@@ -28,7 +28,7 @@
       <el-form ref="form" :model="form" label-width="120px" :rules="rules">
         <el-form-item label="文章类型：" prop="articleType">
           <el-select v-model="form.articleType" placeholder="请选择文章类型" clearable>
-            <el-option label="1" value="1">
+            <el-option v-for="item in catList" :key="item.id" :label="item.name" :value="item.name">
             </el-option>
           </el-select>
         </el-form-item>
@@ -40,7 +40,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="showDialog = false">取 消</el-button>
-        <el-button type="primary" @click="showDialog = false">确 定</el-button>
+        <el-button type="primary" @click="submit" v-loading="loading">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -50,14 +50,17 @@
 import Vue from "vue"
 import mavonEditor from "mavon-editor"
 import "mavon-editor/dist/css/index.css"
+import { addArticleApi, getCatgoryApi } from "@api/article/index"
+import axios from "axios"
 Vue.use(mavonEditor)
 export default {
   name: "article-edit",
-
   data() {
     return {
       showDialog: false,
       form: {},
+      catList: [],
+      loading: false,
       rules: {
         articleType: [{ required: true, message: "请选择文章分类", trigger: "change" }]
       },
@@ -112,22 +115,96 @@ export default {
     }
   },
   created() {
-
+    this.$message.info("您可以按下CTRL+S暂存内容哦~")
+    this.getCatgory()
   },
   mounted() {
 
   },
   methods: {
+    //新增文章
+    addArticle(params) {
+      this.loading = true
+      addArticleApi(params)
+        .then(res => {
+          if (res.code === 200) {
+            this.isPublish = true
+            this.$message.success("太棒了，发布成功！")
+            this.showDialog = false
+            setTimeout(() => {
+              this.$router.push("/")
+            }, 1500)
+          }
+        })
+        .finally(() => {
+          this.loading = false
+        })
+    },
+    //获取文章分类
+    getCatgory() {
+      getCatgoryApi()
+        .then(res => {
+          if (res.code === 200) {
+            this.catList = res.data.data
+          }
+        })
+    },
+    //点击确定
+    async submit() {
+      try {
+        await this.$refs["form"].validate()
+        const obj = {
+          title: this.articleTitle,
+          content: this.articleContent,
+          author: this.$sessionUtil.getItem("user").nickname ? this.$sessionUtil.getItem("user").nickname : this.$sessionUtil.getItem("user").username,
+          user_id: this.$sessionUtil.getItem("user").id,
+          catgory: this.form.articleType,
+          article_views: "0",
+          article_thumbs: "0"
+        }
+        this.addArticle(obj)
+        console.log(obj)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    //添加图片
+    imgAdd(pos, file) {
+      // 第一步.将图片上传到服务器.
+      const formdata = new FormData()
+      formdata.append("image", file)
+      axios({
+        url: "server url",
+        method: "post",
+        data: formdata,
+        headers: { "Content-Type": "multipart/form-data" }
+      }).then((url) => {
+        // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
+        /**
+               * $vm 指为mavonEditor实例，可以通过如下两种方式获取
+               * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
+               * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
+               */
+        this.$refs.md.$img2Url(pos, url)
+      })
+    },
+    //必须填写标题
     click() {
-      // this.saveEditor()
+      if (!this.articleContent || !this.articleTitle) {
+        this.$message.info("请您输入文章标题")
+        return
+      }
       this.showDialog = true
     },
+    //
     handleClose() {
 
     },
     cropperImg() { },
+    // ctrl+s 保存输入的内容到本地
     saveEditor(value, render) {
-      console.log("md内容", render)
+      this.content = render
+      // this.isPublish = !this.isPublish
       window.localStorage.setItem(
         "LOCAL_ARTICLE",
         JSON.stringify({
@@ -135,9 +212,27 @@ export default {
           articleTitle: this.articleTitle
         })
       )
+      this.$message.info("已为您暂存文章信息")
+    },
+    //判断之前有没有缓存有的话给取出来
+    backFill() {
+      const res = JSON.parse(window.localStorage.getItem("LOCAL_ARTICLE"))
+      if (res.articleContent && res.articleTitle) {
+        this.articleContent = res.res.articleContent
+        this.articleTitle = res.res.articleTitle
+      }
     }
+  },
+  beforeRouteLeave(to, from, next) {
+    // if (!this.isPublish) {
+    //   next()
+    // } else {
+    //   this.saveEditor()
+    //   next()
+    // }
+    !this.isPublish && this.saveEditor()
+    next()
   }
-
 }
 </script>
 

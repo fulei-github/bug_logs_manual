@@ -4,36 +4,37 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-08 11:31:12
+ * @LastEditTime: 2022-07-16 18:08:16
 -->
 <template>
   <div class='container-box'>
     <div class="title">
       <el-button class="button-back" type="primary" @click="$router.go(-1)">返回</el-button>
-      <span class="text">前端常用60种工具方法</span>
+      <span class="text">{{info.title}}</span>
       <div class="viewer">
-        <img class="avatar" :src="require('@/assets/imgs/bg4.jpg')" alt="">
-        <span class="mr16">admin用户</span>
+        <img class="avatar" v-if="!!info.avatar" :src="info.avatar" alt="">
+        <i class="el-icon-user-solid" v-else></i>
+        <span class="mr16">{{info.author}}</span>
         <span class="mr16">
-          <svg-icon icon-class="eye-open" />
-          21
+          <svg-icon icon-class="eyes" />
+          {{info.article_views}}
         </span>
         <span class="mr16">
-          <svg-icon icon-class="thumbs" /> 23
+          <svg-icon icon-class="thumbs" /> {{info.article_thumbs}}
         </span>
         <span>
           <svg-icon icon-class="time" />
-          {{ dayFormat(Date.now(), 'YYYY年MM月DD日 HH:mm') }}
+          {{ info.created_at }}
         </span>
       </div>
     </div>
     <div class="content">
       <mavon-editor class="bga-back-top" :toolbarsFlag="false" :editable="false" :subfield="false" defaultOpen="preview" v-model="content" />
       <!-- 点赞 -->
-      <div :class="isLike?'button-like  button-haslike':'button-like'" @click="handleLike">
+      <!-- <div :class="isLike?'button-like  button-haslike':'button-like'" @click="handleLike">
         <svg-icon :icon-class="isLike?'thumbs-fill':'thumbs'" />
         <div>{{isLike? '已鼓励' : '鼓励一下'}}</div>
-      </div>
+      </div> -->
     </div>
     <f-scroll-top scrollClass="v-note-show" />
 
@@ -48,14 +49,38 @@ Vue.use(mavonEditor)
 export default {
   data() {
     return {
+      info: {
+        title: "", //标题
+        author: "", //作者
+        article_views: "", //查看数
+        article_thumbs: "", //点赞数
+        created_at: "" //创建时间
+      },
       content: "",
       isLike: false
     }
   },
+  watch: {
+    $route: {
+      handler(to) {
+        if (to.path === "/article-detail") {
+          this.getCurrInfo()
+        }
+      },
+      deep: true,
+      immediate: true
+
+    }
+  },
   created() {
-    this.content = JSON.parse(window.localStorage.getItem("LOCAL_ARTICLE")).articleContent
+    // this.content = JSON.parse(window.localStorage.getItem("LOCAL_ARTICLE")).articleContent
   },
   methods: {
+    //初始化信息
+    getCurrInfo() {
+      this.info = this.$route.query.info
+      this.content = this.$route.query.info.content
+    },
     handleLike() {
       this.isLike = !this.isLike
     }

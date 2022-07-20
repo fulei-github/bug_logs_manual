@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-16 15:23:39
+ * @LastEditTime: 2022-07-16 21:59:47
 -->
 <template>
   <!-- <el-menu :default-active='index' :collapse="true" :unique-opened="true" router class="el-menu-vertical-demo">
@@ -30,12 +30,7 @@ export default {
   data() {
     return {
       data: [
-        {
-          id: "4",
-          icon: "el-icon-s-platform",
-          name: "监控大屏",
-          index: "/echarts"
-        },
+
         {
           id: "0",
           icon: "el-icon-s-home",
@@ -61,6 +56,12 @@ export default {
           index: "/catgory"
         },
         {
+          id: "4",
+          icon: "el-icon-s-platform",
+          name: "监控大屏",
+          index: "/echarts"
+        },
+        {
           id: "3",
           icon: "el-icon-user",
           name: "个人账号",
@@ -75,7 +76,7 @@ export default {
     $route: {
       handler(to) {
         this.defaultItem = to.fullPath
-        console.log("菜单栏组件", to)
+        // console.log("菜单栏组件", to)
       },
       deep: true,
       immediate: true
