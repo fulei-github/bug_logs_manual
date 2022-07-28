@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-28 22:35:54
+ * @LastEditTime: 2022-07-28 22:49:06
 -->
 
 <template>
@@ -92,6 +92,11 @@ export default {
       },
       immediate: true
     }
+  },
+  activated() {
+    this.getCatgory()
+    this.controlCatList()
+    this.getArticle()
   },
   created() {
     this.getCatgory()

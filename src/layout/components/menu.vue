@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-16 21:59:47
+ * @LastEditTime: 2022-07-28 23:04:38
 -->
 <template>
   <!-- <el-menu :default-active='index' :collapse="true" :unique-opened="true" router class="el-menu-vertical-demo">
@@ -29,8 +29,73 @@
 export default {
   data() {
     return {
-      data: [
+      data: [],
+      activedIndex: 0,
+      defaultItem: ""
+    }
+  },
+  watch: {
+    $route: {
+      handler(to) {
+        this.defaultItem = to.fullPath
+        const permission = JSON.parse(window.sessionStorage.getItem("user"))?.permission || ""
+        if (permission.includes("admin") || permission.includes("super")) {
+          this.controlList("admin")
+        } else {
+          this.controlList()
+        }
+      },
+      deep: true,
+      immediate: true
+    }
+  },
+  created() {
 
+  },
+  methods: {
+    controlList(type) {
+      if (type === "admin") {
+        this.data = [
+          {
+            id: "0",
+            icon: "el-icon-s-home",
+            name: "首页",
+            index: "/index"
+          },
+          {
+            id: "1",
+            icon: "el-icon-edit",
+            name: "编辑文章",
+            index: "/article-edit"
+          },
+          {
+            id: "2",
+            icon: "el-icon-s-grid",
+            name: "权限管理",
+            index: "/permission"
+          },
+          {
+            id: "5",
+            icon: "el-icon-notebook-1",
+            name: "文章管理",
+            index: "/catgory"
+          },
+          {
+            id: "4",
+            icon: "el-icon-s-platform",
+            name: "监控大屏",
+            index: "/echarts"
+          },
+          {
+            id: "3",
+            icon: "el-icon-user",
+            name: "个人账号",
+            index: "/personal"
+          }
+        ]
+        return
+      }
+      this.data = [
         {
           id: "0",
           icon: "el-icon-s-home",
@@ -44,18 +109,6 @@ export default {
           index: "/article-edit"
         },
         {
-          id: "2",
-          icon: "el-icon-s-grid",
-          name: "权限管理",
-          index: "/permission"
-        },
-        {
-          id: "5",
-          icon: "el-icon-notebook-1",
-          name: "文章管理",
-          index: "/catgory"
-        },
-        {
           id: "4",
           icon: "el-icon-s-platform",
           name: "监控大屏",
@@ -67,25 +120,8 @@ export default {
           name: "个人账号",
           index: "/personal"
         }
-      ],
-      activedIndex: 0,
-      defaultItem: ""
-    }
-  },
-  watch: {
-    $route: {
-      handler(to) {
-        this.defaultItem = to.fullPath
-        // console.log("菜单栏组件", to)
-      },
-      deep: true,
-      immediate: true
-    }
-  },
-  created() {
-
-  },
-  methods: {
+      ]
+    },
     handleClick(item, i) {
       if (item.index === "/echarts") {
         this.$confirm(`为获得更好的体验，请您进入大屏页面后按下键盘F11`, "提示", {

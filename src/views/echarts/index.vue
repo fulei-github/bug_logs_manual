@@ -2,7 +2,8 @@
   <div id="data-view">
     <dv-full-screen-container>
       <div class="main-header">
-        <div class="mh-middle">博客后台监控大屏</div>
+        <!-- <div class="mh-middle">博客后台监控大屏</div> -->
+        <div class="mh-middle">监控大屏（残次品 大神们帮忙画下？）</div>
 
       </div>
 

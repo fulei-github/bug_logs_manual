@@ -4,12 +4,13 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-13 22:56:18
+ * @LastEditTime: 2022-07-28 23:04:16
  */
 // import router from "@/router" // 引入路由实例
 import { getToken } from "@/utils/auth"
 const whiteList = ["/login", "/404", "/index", "/article-detail", "/echarts"] // 定义白名单  所有不受权限控制的页面
-
+// const userList = ["/login", "/", "/article", "/article-detail", "/personal", "/echarts", "/me"] //普通用户
+const permission = JSON.parse(window.sessionStorage.getItem("user"))?.permission || ""
 function beforeEachHandler(to, from, next) {
   if (
     whiteList
@@ -24,7 +25,12 @@ function beforeEachHandler(to, from, next) {
     const token = getToken()
     if (token !== null) {
       //有token
-      next()
+      if (permission.includes("admin") || permission.includes("super")) {
+        next()
+      } else {
+        next("/")
+      }
+      // next()
     } else {
       //无token
       next("/login")
