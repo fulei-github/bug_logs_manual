@@ -5,7 +5,7 @@
  * @Autor: fulei
  * @Date: 2022-07-03 13:12:24
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-16 21:58:40
+ * @LastEditTime: 2022-07-28 22:10:41
 -->
 <template>
   <div class="page-article-edit">
@@ -20,15 +20,15 @@
     <mavon-editor ref="md" v-model="articleContent" @save="saveEditor" @imgAdd="imgAdd" :ishljs="true" :tabSize="2" :toolbars="toolbars" :placeholder="placeholder">
       <!-- 左工具栏前加入自定义按钮 -->
       <template slot="left-toolbar-after">
-        <button type="button" class="op-icon fa fa-clear-local" aria-hidden="true" title="清本地缓存">清</button>
+        <button type="button" class="op-icon fa fa-clear-local" aria-hidden="true" title="清本地缓存" @click="handleDel">清</button>
       </template>
     </mavon-editor>
     <!-- dialog -->
     <el-dialog title="提示" :visible.sync="showDialog" width="30%" :before-close="handleClose">
       <el-form ref="form" :model="form" label-width="120px" :rules="rules">
         <el-form-item label="文章类型：" prop="articleType">
-          <el-select v-model="form.articleType" placeholder="请选择文章类型" clearable>
-            <el-option v-for="item in catList" :key="item.id" :label="item.name" :value="item.name">
+          <el-select v-model="form.articleType" placeholder="请选择文章类型" clearable @change="changeSelect">
+            <el-option v-for="item in catList" :key="item.id" :label="item.name" :value="item.id">
             </el-option>
           </el-select>
         </el-form-item>
@@ -65,6 +65,7 @@ export default {
         articleType: [{ required: true, message: "请选择文章分类", trigger: "change" }]
       },
       tabsList: [], // 分类
+      cat_name: "",
       articleContent: "", // 文章内容
       articleTitle: "", // 文章标题
       placeholder: `开始编辑...
@@ -114,14 +115,24 @@ export default {
       illustrationUrl: "" // 文章列表封面图片
     }
   },
+  activated() {
+    this.formatContent()
+  },
   created() {
+    this.formatContent()
     this.$message.info("您可以按下CTRL+S暂存内容哦~")
     this.getCatgory()
   },
-  mounted() {
-
-  },
   methods: {
+    //编辑？
+    formatContent() {
+      const info = this.$route.query || {}
+      if (info.type === "again") {
+        const obj = this.$sessionUtil.getItem("info")
+        this.articleTitle = obj.title
+        this.articleContent = obj.content
+      }
+    },
     //新增文章
     addArticle(params) {
       this.loading = true
@@ -149,6 +160,11 @@ export default {
           }
         })
     },
+    //下拉框的change‘事件
+    changeSelect(val) {
+      const obj = this.catList.find(v => v.id === val)
+      this.cat_name = obj.name
+    },
     //点击确定
     async submit() {
       try {
@@ -158,7 +174,8 @@ export default {
           content: this.articleContent,
           author: this.$sessionUtil.getItem("user").nickname ? this.$sessionUtil.getItem("user").nickname : this.$sessionUtil.getItem("user").username,
           user_id: this.$sessionUtil.getItem("user").id,
-          catgory: this.form.articleType,
+          catgory: this.cat_name,
+          cat_id: this.form.articleType,
           article_views: "0",
           article_thumbs: "0"
         }
@@ -191,13 +208,30 @@ export default {
     //必须填写标题
     click() {
       if (!this.articleContent || !this.articleTitle) {
-        this.$message.info("请您输入文章标题")
+        this.$message.info("请您输入文章标题和文章内容呦~")
         return
       }
       this.showDialog = true
     },
     //
     handleClose() {
+
+    },
+    handleDel() {
+      this.$confirm("您确定要清空 文章内容 吗?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        this.articleTitle = ""
+        this.articleContent = ""
+        window.localStorage.removeItem("LOCAL_ARTICLE")
+      }).catch(() => {
+        this.$message({
+          type: "info",
+          message: "保存内容了呦~"
+        })
+      })
 
     },
     cropperImg() { },
@@ -212,7 +246,7 @@ export default {
           articleTitle: this.articleTitle
         })
       )
-      this.$message.info("已为您暂存文章信息")
+      this.$message.info("已为您暂存文章信息哦~")
     },
     //判断之前有没有缓存有的话给取出来
     backFill() {

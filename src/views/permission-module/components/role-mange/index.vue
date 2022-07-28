@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-16 22:52:01
+ * @LastEditTime: 2022-07-27 22:40:21
 -->
 <template>
   <div class="box">
@@ -49,7 +49,7 @@
     <f-title content="用户列表" border>
       <template #right-area>
         <el-button plain size="small" @click="showFormArea = !showFormArea">{{showFormArea ? '隐藏搜索' : '显示搜索'}}</el-button>
-        <el-button plain size="small" @click="queryInfo">刷新</el-button>
+        <el-button plain size="small" @click="getList">刷新</el-button>
 
         <el-button type="primary" size="small" @click="addRole">添加角色</el-button>
       </template>

@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-16 22:13:01
+ * @LastEditTime: 2022-07-28 21:51:30
 -->
 <template>
   <div class="box">
@@ -114,7 +114,7 @@ export default {
         const res = await getArticleApi(params)
         if (res.code === 200) {
           console.log(res)
-          // this.paginationForm.total = res.data.total
+          this.paginationForm.total = res.data.totalObj.total
           this.tableData = res.data.data
           // this.tableData.forEach(v => { v.state = v.state === "1" ? true : false })
         }

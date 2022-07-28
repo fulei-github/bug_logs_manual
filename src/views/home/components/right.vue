@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-16 22:27:48
+ * @LastEditTime: 2022-07-28 22:38:30
 -->
 <template>
   <div class='right-info'>
@@ -12,15 +12,15 @@
     <div class="overview">
       <span class="overview-item">
         <p>用户</p>
-        <p>10</p>
+        <p>{{user_total}}</p>
       </span>
       <span class="overview-item item-border">
         <p>文章</p>
-        <p>{{rightForm.art_total}}</p>
+        <p>{{art_total}}</p>
       </span>
       <span class="overview-item">
         <p>分类</p>
-        <p>{{rightForm.cat_total}}</p>
+        <p>{{cat_total}}</p>
       </span>
     </div>
     <!-- 卡片 -->
@@ -41,21 +41,29 @@
     </div>
     <!-- 文章列表区域 -->
     <div class="article-box">
-      <h3>
-        <i class="el-icon-s-claim"></i>个人成就 (20篇)
-        <span class="get-thumbs">获得 <span class="color-main">3</span> 个点赞</span>
-      </h3>
+      <el-tooltip class="item" effect="dark" content="此区域会记录您发表的文章哦~" placement="right-start">
+        <h3>
+          <i class="el-icon-s-claim"></i>个人成就({{total}} 篇)
+          <span class="get-thumbs">获得 <span class="color-main">3</span> 个点赞</span>
+        </h3>
+      </el-tooltip>
       <div class="article-name">
-        <el-collapse v-model="activeNames" accordion>
+        <!-- v-if="list.length !== 0" -->
+        <el-collapse v-model="activeNames" accordion v-if="total">
           <el-collapse-item :title="item.name" :name="index" v-for="(item, index) in list" :key="index">
             <div class="article-list clearfix" v-for="(child, ind) in item.data" :key="ind">
               <span class="article-title">{{child && child.title}} </span>
-              <el-link class="article-edit" @click="handlEdit">编辑</el-link>
+              <el-link class="article-edit" @click="handlEdit(child)">编辑</el-link>
             </div>
           </el-collapse-item>
         </el-collapse>
+        <div class="empty-list" v-else>
+          <f-empty />
+          <el-button type="primary" class="btn" @click="goLogin">点此去登录</el-button>
+        </div>
+        <!-- -->
       </div>
-      <!-- <f-empty /> -->
+
     </div>
   </div>
 </template>
@@ -83,6 +91,10 @@ export default {
         }
       ],
       activeNames: "",
+      user_total: 0,
+      art_total: 0,
+      cat_total: 0,
+      total: 0,
       list: []
     }
   },
@@ -96,30 +108,30 @@ export default {
       "偷偷定下小目标：拿一次榜一☝️"
     ]
     this.teamTip = arr[Math.floor(Math.random() * arr.length)]
-    // this.getMenuList()
   },
   methods: {
-    //初始化信息
-    formatInfo() {
-
-    },
     avaMore() { },
-    getMenuList() {
-      this.list = []
-      for (let index = 0; index < 20; index++) {
-        this.list.push({
-          name: "前端" + index,
-          data: [{
-            title: "前端必会算法" + index
-          },
-          {
-            title: "前端必会算法" + index
-          }]
-        })
-      }
+    goLogin() {
+      this.$router.push("/login")
     },
-    handlEdit() {
-      this.$router.push("/article-detail")
+    getTotal(obj) {
+      this.user_total = obj.user_total
+      this.art_total = obj.art_total
+      this.cat_total = obj.cat_total
+    },
+    getMenuList(obj) {
+      this.list = obj.arr
+      this.total = obj.total
+    },
+    handlEdit(item) {
+      this.$message.info("该功能暂未开放...")
+      // this.$sessionUtil.setItem("info", item)
+      // this.$router.push({
+      //   path: "/article-edit",
+      //   query: {
+      //     type: "again"
+      //   }
+      // })
     }
   }
 }
@@ -256,6 +268,24 @@ export default {
           float: right;
           font-size: 13px;
           color: $main_color;
+        }
+      }
+      .empty-list {
+        height: 100%;
+        position: relative;
+        .btn {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+        .el-button--primary {
+          background-color: $main_color;
+          border-color: $main_color;
+          &:hover {
+            background-color: $gradient_blue_color_2;
+            border-color: $fourth_border_color;
+          }
         }
       }
     }

@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-16 22:12:37
+ * @LastEditTime: 2022-07-28 22:19:09
  */
 import request from "../axios"
 // const serveName = process.env.VUE_APP_SERVE_NAME
@@ -18,7 +18,31 @@ export function getCatgoryApi(data) {
     data
   })
 }
+// 根据分类id获取该id下内容
+export function findListBySeeApi(data) {
+  return request({
+    url: `/api/article/findListBySee`,
+    method: "post",
+    data
+  })
+}
 
+// 根据分类id获取该id下内容
+export function getArtByIdApi(data) {
+  return request({
+    url: `/api/article/getList`,
+    method: "post",
+    data
+  })
+}
+// 根据userid得到该用户下的分类下的文章
+export function getCatListApi(data) {
+  return request({
+    url: `/api/article/getCatList`,
+    method: "post",
+    data
+  })
+}
 // 新增分类
 export function addCatgoryApi(data) {
   return request({
