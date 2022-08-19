@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-28 22:49:06
+ * @LastEditTime: 2022-07-30 13:09:54
 -->
 
 <template>
@@ -51,9 +51,13 @@
       <span class="update-time mr24" @click="update">
         <i class="el-icon-message-solid mr4"></i>更新记录
       </span>
-      <a class="update-time" href="https://baidu.com" target="blank">
+      <span class="update-time " @click="showDrawerFn">
         <i class="el-icon-s-opportunity mr4"></i>建议意见
-      </a>
+      </span>
+      <!-- <a class="update-time" href="https://baidu.com" target="blank">
+        <i class="el-icon-s-opportunity mr4"></i>建议意见
+      </a> -->
+      <right-drawer :showDrawer="showDrawer" @close="showDrawer = false" />
     </div>
   </div>
 </template>
@@ -61,16 +65,19 @@
 <script>
 import ListPanel from "../article-module/index.vue"
 import RightPanel from "./components/right.vue"
+import RightDrawer from "./bug.vue"
 import { getCatgoryApi, getArticleApi, getArtByIdApi, getCatListApi } from "@api/article/index"
 // import { showFullScreenLoading, endLoading } from "@/utils/loading"
 export default {
   name: "Home",
   components: {
     ListPanel,
-    RightPanel
+    RightPanel,
+    RightDrawer
   },
   data() {
     return {
+      showDrawer: false,
       activeName: "1",
       tabsList: [],
       list: [],
@@ -233,6 +240,9 @@ export default {
     },
     update() {
       this.$message.info("该功能暂未开放...")
+    },
+    showDrawerFn() {
+      this.showDrawer = true
     }
   }
 }

@@ -5,7 +5,7 @@
  * @Autor: fulei
  * @Date: 2022-07-03 13:12:24
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-28 22:10:41
+ * @LastEditTime: 2022-07-30 10:37:11
 -->
 <template>
   <div class="page-article-edit">
@@ -34,7 +34,8 @@
         </el-form-item>
         <el-form-item label="列表缩略图：">
           <div class="">
-            <f-upload-cropper class="avatar-box" :image="form.imageUrl" :cropWidth="280" :cropHeight="160" @cropperImg="cropperImg" />
+            <!-- <f-upload-cropper class="avatar-box" :image="form.imageUrl" :cropWidth="280" :cropHeight="160" @cropperImg="cropperImg" /> -->
+            <f-upload-avatar :jpg="form.imageUrl" @update:jpg="getJpgSrc" />
           </div>
         </el-form-item>
       </el-form>
@@ -51,14 +52,20 @@ import Vue from "vue"
 import mavonEditor from "mavon-editor"
 import "mavon-editor/dist/css/index.css"
 import { addArticleApi, getCatgoryApi } from "@api/article/index"
-import axios from "axios"
+import COS from "cos-js-sdk-v5"
+const cos = new COS({
+  SecretId: "AKIDiEVVEgrlOjna5JGwLTKtBDySgcHelbAR", // 身份识别ID
+  SecretKey: "1lDOIrACwQdZEcjZ8PQ9blfIeiX5LK1S" // 身份秘钥
+})
 Vue.use(mavonEditor)
 export default {
   name: "article-edit",
   data() {
     return {
       showDialog: false,
-      form: {},
+      form: {
+        imgUrl: ""
+      },
       catList: [],
       loading: false,
       rules: {
@@ -66,6 +73,7 @@ export default {
       },
       tabsList: [], // 分类
       cat_name: "",
+      jpg: "",
       articleContent: "", // 文章内容
       articleTitle: "", // 文章标题
       placeholder: `开始编辑...
@@ -116,14 +124,18 @@ export default {
     }
   },
   activated() {
-    this.formatContent()
+    // this.formatContent()
   },
   created() {
-    this.formatContent()
+    // this.formatContent()
     this.$message.info("您可以按下CTRL+S暂存内容哦~")
     this.getCatgory()
   },
   methods: {
+    getJpgSrc(val) {
+      this.form.imgUrl = val
+      console.log(val)
+    },
     //编辑？
     formatContent() {
       const info = this.$route.query || {}
@@ -176,33 +188,41 @@ export default {
           user_id: this.$sessionUtil.getItem("user").id,
           catgory: this.cat_name,
           cat_id: this.form.articleType,
+          photo: this.form.imgUrl,
           article_views: "0",
           article_thumbs: "0"
         }
-        this.addArticle(obj)
-        console.log(obj)
+        if (this.form.imgUrl === "") {
+          this.$confirm(`您没有上传缩略图，是否使用系统自带缩略图？`, "提示", {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            type: "warning"
+          }).then(() => {
+            obj.photo = "https://fulei-1308304229.cos.ap-beijing.myqcloud.com/hello.jpg"
+            this.addArticle(obj)
+          }).catch(() => {
+            this.addArticle(obj)
+          })
+        }
+
       } catch (error) {
         console.log(error)
       }
     },
     //添加图片
     imgAdd(pos, file) {
-      // 第一步.将图片上传到服务器.
-      const formdata = new FormData()
-      formdata.append("image", file)
-      axios({
-        url: "server url",
-        method: "post",
-        data: formdata,
-        headers: { "Content-Type": "multipart/form-data" }
-      }).then((url) => {
-        // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
-        /**
-               * $vm 指为mavonEditor实例，可以通过如下两种方式获取
-               * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
-               * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
-               */
-        this.$refs.md.$img2Url(pos, url)
+      cos.putObject({
+        Bucket: "fulei-1308304229", /* 存储桶 */
+        Region: "ap-beijing", /* 存储桶所在地域，必须字段 */
+        Key: file.name, /* 文件名 */
+        StorageClass: "STANDARD", // 上传模式, 标准模式
+        Body: file, // 上传文件对象
+        onProgress: (progressData) => {
+        }
+      }, (err, data) => {
+        if (!err) {
+          this.$refs.md.$img2Url(pos, `https://${data.Location}`)
+        }
       })
     },
     //必须填写标题

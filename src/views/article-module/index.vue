@@ -3,12 +3,12 @@
     <transition name="fade" mode="out-in">
       <div v-if="list.length">
         <li class="list-item" v-for="(item,i) in list" :key="i" @click="handleClick(item)">
-          <el-image class="image" :src="item.article_img" fit="scale-down"></el-image>
+          <el-image class="image" :src="item.photo" fit="scale-down"></el-image>
           <div class="info-box">
             <p class="title">{{item.title}}</p>
             <p class="footer">
               <span class="avatar">
-                <img v-if="!!item.avatar" :src="item.avatar">
+                <img v-if="!!item.photo" :src="item.photo" alt="">
                 <i class="el-icon-user-solid" v-else></i>
               </span>
               <span class="company-name mr24">{{item.article_author}}</span>
@@ -22,7 +22,7 @@
               </span>
               <span>
                 <svg-icon icon-class="time" />
-                {{dayFormat(item.article_time, 'YYYY-MM-DD HH:mm:ss')}}
+                {{dayFormat(item.created_at, 'YYYY-MM-DD')}}
               </span>
             </p>
           </div>
@@ -98,6 +98,8 @@ export default {
         display: flex;
         align-items: center;
         .avatar {
+          width: 24px;
+          height: 24px;
           img {
             width: 24px;
             height: 24px;

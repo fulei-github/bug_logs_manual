@@ -1,12 +1,12 @@
 <template>
   <el-upload class="avatar-uploader" action="#" :show-file-list="false" :before-upload="beforeAvatarUpload" :http-request="upload">
-    <img v-if="jpg" :src="jpg" class="avatar" alt="" />
+    <img v-if="staffPhoto" :src="staffPhoto" class="avatar" alt="" />
     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
     <el-progress v-show="showProgress" type="circle" :percentage="percent" class="progress" />
   </el-upload>
 </template>
 
-<style>
+<style lang="scss" scoped>
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
@@ -15,7 +15,7 @@
   overflow: hidden;
 }
 .avatar-uploader .el-upload:hover {
-  border-color: rgba(76, 110, 245, 1);
+  border-color: $main_color;
 }
 .avatar-uploader-icon {
   font-size: 28px;
@@ -48,9 +48,9 @@ const cos = new COS({
   SecretKey: "1lDOIrACwQdZEcjZ8PQ9blfIeiX5LK1S" // 身份秘钥
 })
 export default {
-  name: "f-upload-avatar",
+  name: "UpLoadImg",
   props: {
-    jpg: {
+    staffPhoto: {
       type: String,
       default: ""
     }
@@ -96,8 +96,8 @@ export default {
             setTimeout(() => {
               this.showProgress = false
               this.percent = 0
-              this.$emit("update:jpg", `https://${data.Location}`)
-              this.jpg = `https://${data.Location}`
+              this.$emit("update:staffPhoto", `https://${data.Location}`)
+              // this.imageUrl = `https://${data.Location}`
             }, 800)
           }
         })

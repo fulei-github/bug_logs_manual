@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei
- * @LastEditTime: 2022-07-09 09:47:11
+ * @LastEditTime: 2022-07-30 09:57:29
 -->
 <template>
   <div class='container-box'>
@@ -20,7 +20,7 @@
         <div class="form-wrap">
           <el-form label-position="right" label-width="80px" :model="userInfo" ref="formSearch" :rules="rules" size="small">
             <el-form-item label="头 像：">
-              <f-upload-cropper :image="userInfo.avatarUrl" @cropperImg="cropperImg" />
+              <f-upload-avatar :jpg="userInfo.avatarUrl" @update:jpg="getJpgSrc" />
             </el-form-item>
             <el-form-item label="名 称：" prop="name">
               <el-input v-model="userInfo.netName" clearable placeholder="请输入用户名" maxlength="16"></el-input>
@@ -46,15 +46,20 @@
 export default {
   data() {
     return {
-      userInfo: {},
+      userInfo: {
+        avatarUrl: "https://fulei-1308304229.cos.ap-beijing.myqcloud.com/hello.jpg"
+      },
       rules: {}
     }
   },
   created() {
   },
   methods: {
-    cropperImg() { },
-    onSubmit() { }
+    getJpgSrc(val) {
+      console.log(val)
+    },
+    onSubmit() { },
+    loginOut() { }
   }
 }
 </script>
