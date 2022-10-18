@@ -3,8 +3,8 @@
  * @Date: 2022-07-05 15:13:59
  * @Version: 0.1
  * @Autor: fulei
- * @LastEditors: fulei
- * @LastEditTime: 2022-07-30 13:09:54
+ * @LastEditors: fulei🐰
+ * @LastEditTime: 2022-10-18 17:01:00
 -->
 
 <template>
@@ -25,7 +25,8 @@
         </div>
         <transition name="fade" mode="out-in">
           <ul class="card-tabs clearfix" v-if="isShowCardTab" @click="isShowCardTab=!isShowCardTab">
-            <li class="mr12 mb12" :class="{'select-card-tab': item.id === activeName}" v-for="item in tabsList" :key="item.id" @click="handleCardTab(item)">
+            <li class="mr12 mb12" :class="{'select-card-tab': item.id === activeName}" v-for="item in tabsList"
+              :key="item.id" @click="handleCardTab(item)">
               {{item.name}}
             </li>
           </ul>
@@ -38,7 +39,8 @@
           </div>
         </el-tooltip>
         <!-- 分页 -->
-        <f-pagination class="pagination" :total="paginationForm.total" :pageSizes="[10,20, 30, 50]" @pagination="pagination" />
+        <f-pagination class="pagination" :total="paginationForm.total" :pageSizes="[10,20, 30, 50]"
+          @pagination="pagination" />
       </div>
     </div>
     <div class="right_box">
@@ -250,6 +252,7 @@ export default {
 <style lang="scss" scoped>
 .home-box {
   display: flex;
+  justify-content: space-between;
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -262,43 +265,54 @@ export default {
     background-color: white;
     border-radius: 24px;
     padding: 0 $space_10;
+
     .content {
       width: 100%;
       height: 100%;
       position: relative;
+
       ::v-deep .el-tabs {
         height: 100%;
+
         .el-tabs__header {
           padding-right: 40px;
         }
+
         .el-tabs__item {
           font-size: 18px;
         }
+
         .el-tabs__content {
           height: calc(100% - 60px);
           overflow: auto;
+
           &::-webkit-scrollbar {
             width: 4px;
             height: 0 !important;
           }
+
           &::-webkit-scrollbar-thumb {
             background: $second_border_color;
           }
+
           &::-webkit-scrollbar-track {
             border: none 0;
           }
         }
       }
+
       // animation: aniBottomTop 600ms ease-in-out;
       ::v-deep .el-tabs__nav {
         // width: 90%;
       }
     }
+
     .pagination {
       position: absolute;
       bottom: -30px;
       left: 50%;
     }
+
     .more-botton {
       position: absolute;
       width: 32px;
@@ -309,10 +323,12 @@ export default {
       line-height: 32px;
       color: $third_text_color;
       cursor: pointer;
+
       &:hover {
         color: $main_color;
       }
     }
+
     // 按照热度排序
     .hot-botton {
       position: absolute;
@@ -324,10 +340,12 @@ export default {
       line-height: 32px;
       color: $second_text_color;
       cursor: pointer;
+
       &:hover {
         color: $main_color;
       }
     }
+
     .card-tabs {
       width: 80%;
       min-height: 120px;
@@ -346,6 +364,7 @@ export default {
         0px 13.9px 13.1px -24px rgba(0, 0, 0, 0.084),
         0px 38px 36px -24px rgba(0, 0, 0, 0.13);
       padding: 20px;
+
       li {
         list-style: none;
         float: left;
@@ -355,11 +374,13 @@ export default {
         padding: 4px 10px;
         font-size: 14px;
         color: $second_text_color;
+
         &:hover {
           background: $main_color;
           color: #fff;
         }
       }
+
       .select-card-tab {
         background: $main_color;
         color: #fff;
@@ -367,6 +388,7 @@ export default {
       }
     }
   }
+
   .right_box {
     width: 340px;
     height: 100%;
@@ -374,6 +396,7 @@ export default {
     border-radius: 24px;
     animation: anitRightLeft 600ms ease-in-out;
   }
+
   .copyright {
     position: absolute;
     bottom: 0;
@@ -381,6 +404,7 @@ export default {
     font-size: 12px;
     margin-top: 8px;
     color: #aaa;
+
     .update-time:hover {
       color: $main_color;
       cursor: pointer;

@@ -12,7 +12,7 @@
       <f-menu />
     </div>
     <div class="layout-box">
-      <!-- <transition name="fade"> -->
+      <!-- <transition name="fade">  -->
       <keep-alive>
         <router-view />
       </keep-alive>
@@ -50,15 +50,17 @@ export default {
   width: 100%;
   background-color: $main_bg_color;
   display: flex;
+
   .menu-box {
     height: 100vh;
     width: 60px;
     background-color: $main_color;
     animation: aniLeftRight 600ms ease-in-out;
   }
+
   .layout-box {
     padding: $page_padding;
-    // animation: aniBottomTop 600ms ease-in-out;
+    animation: wobble-horizontal 600ms ease-in-out;
     width: 100%;
     height: 100vh;
   }
