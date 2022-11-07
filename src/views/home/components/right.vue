@@ -3,8 +3,8 @@
  * @Date: 2022-07-07 16:49:13
  * @Version: 0.1
  * @Autor: fulei
- * @LastEditors: fulei
- * @LastEditTime: 2022-07-28 22:38:30
+ * @LastEditors: fulei🐰
+ * @LastEditTime: 2022-10-22 16:11:54
 -->
 <template>
   <div class='right-info'>
@@ -138,10 +138,10 @@ export default {
 </script>
 <style lang='scss' scoped>
 .right-info {
-  width: 100%;
-  padding: 10px;
+  // width: 100%;
+  // padding: 10px;
   .overview {
-    width: 300px;
+    width: 270px;
     padding: 12px 0;
     background-color: $fourth_border_color;
     border-radius: 24px;
@@ -162,7 +162,7 @@ export default {
   }
   .team-attribute {
     position: relative;
-    width: 300px;
+    width: 270px;
     height: 159px;
     border-radius: 24px;
     margin: 24px 0 32px;
@@ -210,9 +210,8 @@ export default {
     }
   }
   .article-box {
-    width: 300px;
-    height: 600px;
-
+    width: 270px;
+    height: 500px;
     h3 {
       color: $third_text_color;
       width: 100%;

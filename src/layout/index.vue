@@ -3,8 +3,8 @@
  * @Date: 2022-07-05 17:53:43
  * @Version: 0.1
  * @Autor: fulei
- * @LastEditors: fulei
- * @LastEditTime: 2022-07-07 20:57:09
+ * @LastEditors: fulei🐰
+ * @LastEditTime: 2022-10-19 10:32:51
 -->
 <template>
   <div class='container'>
@@ -46,7 +46,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 .container {
-  height: 100vh;
+  // height: 100vh;
   width: 100%;
   background-color: $main_bg_color;
   display: flex;
@@ -62,7 +62,8 @@ export default {
     padding: $page_padding;
     animation: wobble-horizontal 600ms ease-in-out;
     width: 100%;
-    height: 100vh;
+
+    // height: 100vh;
   }
 }
 </style>

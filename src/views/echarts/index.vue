@@ -105,7 +105,7 @@ export default {
   }
 
   .main-container {
-    height: calc("100% - 80px");
+    height: calc(100vw - 80px);
 
     .border-box-content {
       padding: 20px;

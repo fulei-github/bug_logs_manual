@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei🐰
- * @LastEditTime: 2022-10-18 17:01:00
+ * @LastEditTime: 2022-10-22 16:10:48
 -->
 
 <template>
@@ -252,15 +252,15 @@ export default {
 <style lang="scss" scoped>
 .home-box {
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  // overflow: hidden;
 
   // margin: 4px 0 0 5px;
   .left_box {
-    width: calc(100% - 380px);
-    height: 100%;
+    width: calc(100% - 340px);
+    // height: 100%;
     margin-right: $space_12;
     background-color: white;
     border-radius: 24px;
@@ -392,6 +392,7 @@ export default {
   .right_box {
     width: 340px;
     height: 100%;
+    padding: 10px 18px 0 5px;
     background-color: white;
     border-radius: 24px;
     animation: anitRightLeft 600ms ease-in-out;

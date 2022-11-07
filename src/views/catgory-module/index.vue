@@ -3,8 +3,8 @@
  * @Date: 2022-06-19 17:32:28
  * @Version: 0.1
  * @Autor: fulei
- * @LastEditors: fulei
- * @LastEditTime: 2022-07-16 15:33:20
+ * @LastEditors: fulei🐰
+ * @LastEditTime: 2022-10-19 10:35:41
 -->
 <template>
   <div class="permission-module">
@@ -51,5 +51,9 @@ export default {
   font-size: 18px;
 }
 .permission-module {
+  width: 100%;
+      height: 100%;
+      position: relative;
+  overflow: scroll;
 }
 </style>

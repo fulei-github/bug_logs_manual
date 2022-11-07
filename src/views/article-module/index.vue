@@ -11,6 +11,9 @@
                 <img v-if="!!item.photo" :src="item.photo" alt="">
                 <i class="el-icon-user-solid" v-else></i>
               </span>
+              <span class="author">
+                {{item.author}}
+              </span>
               <span class="company-name mr24">{{item.article_author}}</span>
               <span class="mr24">
                 <svg-icon icon-class="eyes" />

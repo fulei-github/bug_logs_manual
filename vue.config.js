@@ -3,16 +3,16 @@
  * @Date: 2022-07-05 15:16:26
  * @Version: 0.1
  * @Autor: fulei
- * @LastEditors: fulei
- * @LastEditTime: 2022-07-14 11:51:01
+ * @LastEditors: fulei🐰
+ * @LastEditTime: 2022-11-07 20:26:15
  */
 const path = require("path")
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 module.exports = {
-  publicPath: "/", //配置根路径
-  outputDir: "dist", //构建输出目录
+  publicPath: "./", //配置根路径
+  outputDir: "blog", //构建输出目录
   assetsDir: "assets", //静态资源目录(js\css\img)
   lintOnSave: true, //是否开启eslint
   productionSourceMap: false, // 生产环境是否生成 sourceMap 文件
@@ -26,7 +26,8 @@ module.exports = {
     disableHostCheck: true,
     proxy: {
       "/api": {
-        target: "http://127.0.0.1:7001/api",
+        // target: "http://127.0.0.1:7001/api",
+        target: "http://47.94.18.125:7001/api",
         ws: true,
         changOrigin: true,
         pathRewrite: {
@@ -68,13 +69,13 @@ module.exports = {
   },
   chainWebpack: (config) => {
     (config.entry.app = ["./src/main.js"]),
-      // 别名配置
-      config.resolve.alias
-        .set("@", resolve("src"))
-        .set("@utils", resolve("src/utils"))
-        .set("@api", resolve("src/api"))
-        .set("@components", resolve("src/components"))
-        .set("@pic", resolve("src/assets/imgs"))
+    // 别名配置
+    config.resolve.alias
+      .set("@", resolve("src"))
+      .set("@utils", resolve("src/utils"))
+      .set("@api", resolve("src/api"))
+      .set("@components", resolve("src/components"))
+      .set("@pic", resolve("src/assets/imgs"))
     config.resolve.extensions.clear().merge([".js", ".vue", ".json"])
     // set svg-sprite-loader
     config.module.rule("svg").exclude.add(resolve("src/icons")).end()
@@ -89,5 +90,9 @@ module.exports = {
         symbolId: "icon-[name]"
       })
       .end()
+    config.plugin("define").tap((args) => {
+      args[0]["process.env"].BASE_URL = JSON.stringify(process.env.BASE_URL)
+      return args
+    })
   }
 }

@@ -3,8 +3,8 @@
  * @Date: 2022-06-19 17:32:28
  * @Version: 0.1
  * @Autor: fulei
- * @LastEditors: fulei
- * @LastEditTime: 2022-06-27 20:36:05
+ * @LastEditors: fulei🐰
+ * @LastEditTime: 2022-10-29 18:54:02
 -->
 <template>
   <div class="permission-module">
@@ -38,6 +38,7 @@ export default {
   },
 
   methods: {
+   
     handlerClick(i) { //tab切换
       this.active = i
       ""

@@ -3,8 +3,8 @@
  * @Date: 2022-06-24 13:16:42
  * @Version: 0.1
  * @Autor: fulei
- * @LastEditors: fulei
- * @LastEditTime: 2022-07-27 22:40:21
+ * @LastEditors: fulei🐰
+ * @LastEditTime: 2022-10-22 16:16:42
 -->
 <template>
   <div class="box">
@@ -55,7 +55,7 @@
       </template>
     </f-title>
 
-    <el-table :data="tableData" border v-loading="loading">
+    <el-table :data="tableData" border v-loading="loading" height="400">
       <el-table-column type="selection" align="center" width="55">
       </el-table-column>
       <el-table-column type="index" label="角色编号" align="center" width="200">

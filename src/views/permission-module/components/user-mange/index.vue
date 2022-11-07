@@ -3,8 +3,8 @@
  * @Date: 2022-06-24 13:16:42
  * @Version: 0.1
  * @Autor: fulei
- * @LastEditors: fulei
- * @LastEditTime: 2022-07-16 23:05:30
+ * @LastEditors: fulei🐰
+ * @LastEditTime: 2022-10-23 13:09:24
 -->
 <template>
   <div class="box">
@@ -50,19 +50,7 @@
         <el-button plain size="small" @click="getAllList">刷新</el-button>
       </template>
     </f-title>
-    <el-table :data="tableData" border v-loading="loading">
-      <!-- <el-table-column type="index" label="序号" align="center" width="100">
-      </el-table-column>
-      <el-table-column prop="permission" label="险种类型" align="center">
-      </el-table-column>
-      <el-table-column prop="permission" label="单位参保状态" align="center">
-      </el-table-column>
-      <el-table-column prop="permission" label="单位缴费状态" align="center">
-      </el-table-column>
-      <el-table-column prop="permission" label="单位参保时间" align="center">
-      </el-table-column>
-      <el-table-column prop="permission" label="组织有效状态" align="center">
-      </el-table-column> -->
+    <el-table :data="tableData" border v-loading="loading" height="400">
       <el-table-column type="selection" align="center" width="55">
       </el-table-column>
       <el-table-column type="index" label="用户编号" align="center" width="100">

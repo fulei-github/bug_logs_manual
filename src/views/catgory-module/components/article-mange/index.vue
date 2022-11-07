@@ -3,8 +3,8 @@
  * @Date: 2022-06-24 13:16:42
  * @Version: 0.1
  * @Autor: fulei
- * @LastEditors: fulei
- * @LastEditTime: 2022-07-28 21:51:30
+ * @LastEditors: fulei🐰
+ * @LastEditTime: 2022-10-29 19:04:08
 -->
 <template>
   <div class="box">
@@ -50,7 +50,7 @@
         <el-button plain size="small" @click="getAllList">刷新</el-button>
       </template>
     </f-title>
-    <el-table :data="tableData" border v-loading="loading">
+    <el-table :data="tableData" border v-loading="loading" height="400">
       <el-table-column type="selection" align="center" width="55">
       </el-table-column>
       <el-table-column type="index" label="文章编号" align="center" width="100">
@@ -207,7 +207,7 @@ export default {
 .box {
   background-color: white;
   padding: 12px;
-  height: 100vh;
+  // height: 100vh;
   border-radius: 10px;
   animation: wobble-horizontal 600ms ease-in-out;
   .form {

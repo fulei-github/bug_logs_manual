@@ -3,8 +3,8 @@
  * @Date: 2022-06-24 13:16:42
  * @Version: 0.1
  * @Autor: fulei
- * @LastEditors: fulei
- * @LastEditTime: 2022-07-27 22:34:39
+ * @LastEditors: fulei🐰
+ * @LastEditTime: 2022-10-22 16:15:51
 -->
 <template>
   <div class="box">
@@ -30,7 +30,7 @@
                 <el-input v-model="form.string"></el-input>
               </el-form-item>
             </el-col> -->
-            <el-col :span="6">
+            <el-col :span="8">
               <el-form-item label="创建时间">
                 <el-date-picker v-model="form.createDate" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd" style="width:100%" />
               </el-form-item>
@@ -56,7 +56,7 @@
       </template>
     </f-title>
 
-    <el-table :data="tableData" border v-loading="loading">
+    <el-table :data="tableData" border v-loading="loading" height="400">
       <el-table-column type="selection" align="center" width="55">
       </el-table-column>
       <el-table-column type="index" label="分类编号" align="center" width="110">
@@ -217,7 +217,7 @@ export default {
 .box {
   background-color: white;
   padding: 12px;
-  height: 100vh;
+  // height: 100vh;
   border-radius: 10px;
   animation: wobble-horizontal 600ms ease-in-out;
   .form {

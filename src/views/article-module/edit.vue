@@ -4,8 +4,8 @@
  * @Version: 0.1
  * @Autor: fulei
  * @Date: 2022-07-03 13:12:24
- * @LastEditors: fulei
- * @LastEditTime: 2022-07-30 10:37:11
+ * @LastEditors: fulei🐰
+ * @LastEditTime: 2022-10-19 10:07:20
 -->
 <template>
   <div class="page-article-edit">
@@ -204,7 +204,7 @@ export default {
             this.addArticle(obj)
           })
         }
-
+        this.addArticle(obj)
       } catch (error) {
         console.log(error)
       }
