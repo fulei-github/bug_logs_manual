@@ -3,8 +3,8 @@
  * @Date: 2022-06-13 10:52:07
  * @Version: 0.1
  * @Autor: fulei
- * @LastEditors: fulei
- * @LastEditTime: 2022-07-14 15:00:17
+ * @LastEditors: fulei🐰
+ * @LastEditTime: 2022-11-07 20:37:39
 -->
 <template>
   <div class="login-box" ref="vantaRef">
@@ -110,12 +110,12 @@ export default {
       await this.$refs.form.validate()
       try {
         switch (key) {
-          case "0":
-            this.handleLogin()
-            break
-          case "1":
-            this.handleReg()
-            break
+        case "0":
+          this.handleLogin()
+          break
+        case "1":
+          this.handleReg()
+          break
         }
         this.loading = false
       } catch (error) {
@@ -130,11 +130,12 @@ export default {
           username: this.form.username,
           password: this.form.password
         }
-        await this.getTokenAction(params)
+        const res = await this.getTokenAction(params)
+        res ? this.$router.replace(this.redirect || "/") : console.log("粗心的小伙输错密码了吧")
         // if (res.code === 200) {
         //   this.$message.success(res.msg)
         // }
-        this.$router.replace(this.redirect || "/")
+        // this.$router.replace(this.redirect || "/")
       } catch (error) {
         console.log(error)
       }

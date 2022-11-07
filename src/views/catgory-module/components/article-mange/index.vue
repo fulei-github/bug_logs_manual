@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei🐰
- * @LastEditTime: 2022-10-29 19:04:08
+ * @LastEditTime: 2022-11-07 20:53:28
 -->
 <template>
   <div class="box">
@@ -158,6 +158,11 @@ export default {
     },
     //删除按钮
     handleDelte(row) {
+      //TODO: 权限控制接口回头再写 用权限表示判断
+      const flag = row.id === this.$sessionUtil.getItem("user")?.id 
+      if (!flag){
+        return this.$alert("对不起，您未拥有删除其他文章权限，请联系管理员～")
+      }
       this.$confirm(`您确定删除 ${row.title} 文章吗？`, "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",

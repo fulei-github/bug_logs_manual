@@ -3,8 +3,8 @@
  * @Date: 2022-06-16 11:37:35
  * @Version: 0.1
  * @Autor: fulei
- * @LastEditors: fulei
- * @LastEditTime: 2022-07-16 17:58:45
+ * @LastEditors: fulei🐰
+ * @LastEditTime: 2022-11-07 20:35:58
  */
 
 import { getToken, getUser, setTokenInLocal } from "@/utils/auth"
@@ -28,7 +28,9 @@ const actions = {
     if (res.code === 200) {
       Vue.prototype.$message.success(res.msg)
       ctx.commit("setToken", res.data)
+      return true
     }
+    return false
   }
 }
 export default {
