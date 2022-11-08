@@ -76,7 +76,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="created_at" label="创建时间" align="center"></el-table-column>
-      <el-table-column label="操作" align="center">
+      <el-table-column label="操作" align="center" v-if="canClick">
         <template slot-scope="scope">
           <el-button type="primary" size="mini" @click="setRole(scope.row)">设置角色</el-button>
 

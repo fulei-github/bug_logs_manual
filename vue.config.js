@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei🐰
- * @LastEditTime: 2022-11-07 20:26:15
+ * @LastEditTime: 2022-11-08 18:58:36
  */
 const path = require("path")
 function resolve(dir) {
@@ -27,7 +27,7 @@ module.exports = {
     proxy: {
       "/api": {
         // target: "http://127.0.0.1:7001/api",
-        target: "http://47.94.18.125:7001/api",
+        target: "http://47.94.18.125:7001",
         ws: true,
         changOrigin: true,
         pathRewrite: {

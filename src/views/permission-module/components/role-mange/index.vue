@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei🐰
- * @LastEditTime: 2022-10-22 16:16:42
+ * @LastEditTime: 2022-11-08 20:12:17
 -->
 <template>
   <div class="box">
@@ -69,7 +69,7 @@
           {{dayFormat(scope.row.created_at,"datetime")}}
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center">
+      <el-table-column label="操作" align="center" v-if="canClick">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.row)">编 辑</el-button>
           <el-button type="danger" size="mini" @click="handleDelte(scope.row)">删 除</el-button>
@@ -197,6 +197,7 @@ export default {
     },
     //删除按钮
     handleDelte(row) {
+
       this.$confirm(`您确定删除 ${row.permission}? 角色吗？`, "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",

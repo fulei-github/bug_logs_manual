@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei🐰
- * @LastEditTime: 2022-10-22 16:15:51
+ * @LastEditTime: 2022-11-08 20:12:41
 -->
 <template>
   <div class="box">
@@ -72,7 +72,7 @@
           {{dayFormat(scope.row.created_at,"datetime")}}
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" width="300">
+      <el-table-column label="操作" align="center" width="300"  v-if="canClick">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleDelte(scope.row)">删 除</el-button>
           <!-- <el-button size="mini" @click="handleEdit(scope.row)">编 辑</el-button> -->

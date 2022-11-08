@@ -4,7 +4,7 @@
  * @Version: 0.1
  * @Autor: fulei
  * @LastEditors: fulei🐰
- * @LastEditTime: 2022-11-07 20:53:28
+ * @LastEditTime: 2022-11-08 20:12:35
 -->
 <template>
   <div class="box">
@@ -65,7 +65,7 @@
       <el-table-column prop="article_views" label="阅读人数" align="center" width="100">
       </el-table-column>
       <el-table-column prop="created_at" label="创建时间" align="center"></el-table-column>
-      <el-table-column label="操作" align="center">
+      <el-table-column label="操作" align="center"  v-if="canClick">
         <template slot-scope="scope">
           <el-button type="primary" size="mini" @click="viewDetail(scope.row)">查 看</el-button>
           <el-button type="danger" size="mini" @click="handleDelte(scope.row)">删 除</el-button>

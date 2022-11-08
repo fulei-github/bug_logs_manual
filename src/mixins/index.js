@@ -3,8 +3,8 @@
  * @Date: 2022-05-19 18:29:31
  * @Version: 0.1
  * @Autor: fulei
- * @LastEditors: fulei
- * @LastEditTime: 2022-07-16 16:15:53
+ * @LastEditors: fulei🐰
+ * @LastEditTime: 2022-11-08 20:10:00
  */
 import { formatLabelByLocalCode } from "@/utils/dictionary"
 import { dayFormat } from "@/utils/dayjs"
@@ -14,6 +14,7 @@ import { validateUserNameFn, validatePassWordFn } from "@/utils/check"
 export default {
   data() {
     return {
+      user: [],
       paginationForm: {
         total: 10,
         page: "1",
@@ -21,7 +22,18 @@ export default {
       }
     }
   },
+  created() {
+    this.user = JSON.parse(window.sessionStorage.getItem("user"))
+  },
   methods: {
+    //限制权限
+    canClick(){
+      const permission = this.user.permission ? this.user.permission.split(",") : []
+      if (permission.includes("admin") || permission.includes("super")){
+        return true
+      }
+      return false
+    },
     formatLabelByLocalCode,
     dayFormat,
     random,
